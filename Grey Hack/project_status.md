@@ -32,7 +32,7 @@
 ## Current Phase
 
 **Phase:** Implementation
-**Currently working on:** Notification handler - pending testing
+**Currently working on:** Ready for next feature
 **Blocked by:** Nothing
 
 ## Codebase Analysis Progress
@@ -186,15 +186,15 @@
 - [x] F2 on a file: hear "Renaming [name]", input field activated
 - [x] Delete on a file: hear "Deleting [name]", file moves to trash
 
-### Notification Handler
+### Notification Handler (all passed)
 
-- [ ] Play until a notification appears (e.g. connect to multiplayer, receive mail): hear the notification text
-- [ ] Warning notification: hear "Warning: [message]"
-- [ ] Mail notification: hear "Mail: [message]"
-- [ ] Info notification: hear just the message text (no prefix)
-- [ ] Alt+N after a notification: hear "Last notification: [message]"
-- [ ] Alt+N with no notifications yet: hear "No notifications yet"
-- [ ] Multiple notifications: Alt+N repeats only the most recent one
+- [x] Play until a notification appears (e.g. connect to multiplayer, receive mail): hear the notification text
+- [x] Warning notification: hear "Warning: [message]"
+- [x] Mail notification: hear "Mail: [message]"
+- [x] Info notification: hear just the message text (no prefix)
+- [x] Alt+N after a notification: hear "Last notification: [message]"
+- [x] Alt+N with no notifications yet: hear "No notifications yet"
+- [x] Multiple notifications: Alt+N repeats only the most recent one
 
 ## Known Issues
 
