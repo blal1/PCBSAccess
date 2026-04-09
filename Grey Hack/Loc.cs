@@ -331,6 +331,29 @@ namespace GreyHackAccess
             _english["notepad_read_content"] = "{0}";
             _english["notepad_empty"] = "File is empty";
             _english["notepad_help"] = "Notepad. Alt R to read content. Ctrl S to save, Ctrl O to open file. F1 for help.";
+
+            // Mail
+            _english["mail_login"] = "Mail login. Enter username and password.";
+            _english["mail_inbox"] = "Inbox. {0} emails.";
+            _english["mail_outbox"] = "Outbox. {0} emails.";
+            _english["mail_no_emails"] = "No emails.";
+            _english["mail_item"] = "{0} of {1}. From {2}. {3}. {4}";
+            _english["mail_item_unread"] = "unread";
+            _english["mail_item_read"] = "read";
+            _english["mail_reading"] = "From {0}. Subject: {1}.";
+            _english["mail_read_body"] = "{0}";
+            _english["mail_empty_body"] = "Message is empty.";
+            _english["mail_compose"] = "Compose email. Tab to move between fields.";
+            _english["mail_reply"] = "Reply. Type your message.";
+            _english["mail_deleted"] = "Email deleted. {0} emails remaining.";
+            _english["mail_back_to_inbox"] = "Back to inbox.";
+            _english["mail_switched_inbox"] = "Inbox.";
+            _english["mail_switched_outbox"] = "Outbox.";
+            _english["mail_focused"] = "Mail. {0}";
+            _english["mail_help_login"] = "Mail login. Tab between username and password fields, Enter to log in. F1 for help.";
+            _english["mail_help_inbox"] = "Mail inbox. Up Down to navigate emails, Enter to read, N to compose, Tab to switch inbox outbox, Delete to delete. F1 for help.";
+            _english["mail_help_read"] = "Reading email. Alt R to read body, R to reply, Backspace to go back, Delete to delete. F1 for help.";
+            _english["mail_help_compose"] = "Compose email. Tab between fields, Ctrl Enter to send, Escape to cancel. F1 for help.";
         }
 
         #endregion
