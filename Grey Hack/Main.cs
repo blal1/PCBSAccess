@@ -29,6 +29,7 @@ namespace GreyHackAccess
         private IntroHandler _introHandler;
         private TextInputHandler _textInputHandler;
         private ContextMenuHandler _contextMenuHandler;
+        private NotepadHandler _notepadHandler;
         private Harmony _harmony;
 
         /// <summary>
@@ -105,6 +106,9 @@ namespace GreyHackAccess
 
             _contextMenuHandler = new ContextMenuHandler();
             _contextMenuHandler.Register();
+
+            _notepadHandler = new NotepadHandler();
+            _notepadHandler.Register();
         }
 
         private IEnumerator AnnounceStartupDelayed()
@@ -235,6 +239,9 @@ namespace GreyHackAccess
             // File explorer consumes input when active
             if (_fileExplorerHandler.Update()) return;
 
+            // Notepad consumes input when active
+            if (_notepadHandler.Update()) return;
+
             _biosMenuHandler.Update();
             _bootUpHandler.Update();
             _terminalHandler.Update();
@@ -293,6 +300,12 @@ namespace GreyHackAccess
             if (_fileExplorerHandler.IsActive)
             {
                 ScreenReader.Say(_fileExplorerHandler.GetHelpText());
+                return;
+            }
+
+            if (_notepadHandler.IsActive)
+            {
+                ScreenReader.Say(_notepadHandler.GetHelpText());
                 return;
             }
 

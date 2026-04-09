@@ -323,6 +323,14 @@ namespace GreyHackAccess
             _english["context_closed"] = "Context menu closed";
             _english["context_no_context"] = "No context menu available here";
             _english["context_help"] = "Context menu. Up Down to navigate, Enter to select, Escape to close, Space to repeat.";
+
+            // Notepad
+            _english["notepad_focused"] = "Notepad. {0}";
+            _english["notepad_focused_new"] = "Notepad. New file.";
+            _english["notepad_file_loaded"] = "File loaded. {0}";
+            _english["notepad_read_content"] = "{0}";
+            _english["notepad_empty"] = "File is empty";
+            _english["notepad_help"] = "Notepad. Alt R to read content. Ctrl S to save, Ctrl O to open file. F1 for help.";
         }
 
         #endregion
