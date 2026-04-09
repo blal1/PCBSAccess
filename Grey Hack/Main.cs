@@ -27,6 +27,8 @@ namespace GreyHackAccess
         private DialogHandler _dialogHandler;
         private NotificationHandler _notificationHandler;
         private IntroHandler _introHandler;
+        private TextInputHandler _textInputHandler;
+        private ContextMenuHandler _contextMenuHandler;
         private Harmony _harmony;
 
         /// <summary>
@@ -97,6 +99,12 @@ namespace GreyHackAccess
 
             _notificationHandler = new NotificationHandler();
             _notificationHandler.Register();
+
+            _textInputHandler = new TextInputHandler();
+            _textInputHandler.Register();
+
+            _contextMenuHandler = new ContextMenuHandler();
+            _contextMenuHandler.Register();
         }
 
         private IEnumerator AnnounceStartupDelayed()
@@ -188,6 +196,18 @@ namespace GreyHackAccess
                 return true;
             }
 
+            // Shift+F10 = Context menu (for non-file-explorer contexts)
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F10))
+            {
+                // File explorer handles its own Shift+F10
+                if (!_fileExplorerHandler.IsActive)
+                {
+                    DebugLogger.LogInput("Shift+F10", "Context menu");
+                    _contextMenuHandler.TriggerContextMenu();
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -197,7 +217,10 @@ namespace GreyHackAccess
 
         private void UpdateHandlers()
         {
-            // Error/question dialogs consume input when active (highest priority)
+            // Context menus consume input when active (highest priority)
+            if (_contextMenuHandler.Update()) return;
+
+            // Error/question dialogs consume input when active
             if (_dialogHandler.Update()) return;
 
             // Welcome dialog consumes input when active
@@ -216,6 +239,7 @@ namespace GreyHackAccess
             _bootUpHandler.Update();
             _terminalHandler.Update();
             _windowFocusHandler.Update();
+            _textInputHandler.Update();
         }
 
         #endregion
@@ -224,6 +248,12 @@ namespace GreyHackAccess
 
         private void AnnounceHelp()
         {
+            if (_contextMenuHandler.IsActive)
+            {
+                ScreenReader.Say(_contextMenuHandler.GetHelpText());
+                return;
+            }
+
             if (_dialogHandler.IsActive)
             {
                 ScreenReader.Say(_dialogHandler.GetHelpText());
