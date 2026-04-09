@@ -221,6 +221,8 @@ namespace GreyHackAccess
             _english["dialog_gameover_trace"] = "Trace {0} of {1}: {2} {3}, action {4}, from {5}";
             _english["dialog_gameover_copied"] = "Trace log copied to clipboard.";
             _english["dialog_gameover_help"] = "Game over. Left Right for buttons, Enter to select. In detail view: Up Down for traces.";
+            _english["dialog_gameover_router"] = "Router";
+            _english["dialog_gameover_computer"] = "Computer";
 
             // Welcome Dialog
             _english["welcome_panel"] = "Tutorial setup. {0} options. Up Down to navigate, Enter to select.";

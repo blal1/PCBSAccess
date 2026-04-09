@@ -501,7 +501,7 @@ namespace GreyHackAccess
             if (_traceList == null || _traceIndex < 0 || _traceIndex >= _traceList.Count) return;
 
             var trace = _traceList[_traceIndex];
-            string deviceType = trace.isRouter ? "Router" : "Computer";
+            string deviceType = trace.isRouter ? Loc.Get("dialog_gameover_router") : Loc.Get("dialog_gameover_computer");
             string action = trace.logLine.action.ToString();
             string fromIP = trace.logLine.ip;
 
