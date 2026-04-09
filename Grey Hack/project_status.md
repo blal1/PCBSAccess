@@ -32,7 +32,7 @@
 ## Current Phase
 
 **Phase:** Implementation
-**Currently working on:** Ready for next feature
+**Currently working on:** Phase 2 complete (Dialogs + Context Menus). Ready for next feature.
 **Blocked by:** Nothing
 
 ## Codebase Analysis Progress
@@ -71,6 +71,8 @@
 - Notification accessibility (NotificationHandler) - announces notifications via screen reader, Alt+N to repeat last
 - Intro cutscene accessibility (IntroHandler) - announces intro phases, skip feedback, loading transition
 - Terminal auto-focus (WindowFocusHandler) - auto-selects SelectableTerminal when terminal window opens/focuses, fixes post-tutorial focus loss
+- Context menu accessibility (ContextMenuHandler) - Shift+F10 opens context menus in terminal/file explorer, Up/Down/Enter/Escape navigation
+- Game over detail view (DialogHandler) - Left/Right navigates buttons, Enter on Show Details for Up/Down trace navigation
 
 ## Pending Tests
 
@@ -196,6 +198,24 @@
 - [x] Alt+N with no notifications yet: hear "No notifications yet"
 - [x] Multiple notifications: Alt+N repeats only the most recent one
 
+### Context Menu Handler (all passed)
+
+- [x] File explorer Shift+F10: hear option count and first option
+- [x] Up/Down navigates options with position announcements
+- [x] Enter selects option, menu closes
+- [x] Escape closes menu, hear "Context menu closed"
+- [x] Space repeats current option
+- [x] Terminal Shift+F10: hear Copy/Paste context menu
+- [x] Shift+F10 with no context: hear "No context menu available here"
+
+### Game Over Detail View (deferred)
+
+- [ ] Game over appears: hear title, message, button count
+- [ ] Left/Right navigates buttons
+- [ ] Enter on Show Details: hear trace count, Up/Down navigates traces
+- [ ] Enter on Copy Log: hear "Trace log copied to clipboard"
+- [ ] Enter on Close: disconnects
+
 ## Known Issues
 
 - (none yet)
@@ -218,6 +238,21 @@
 - Space: Repeat current icon
 - Alt+S: Toggle start menu
 - Alt+N: Repeat last notification
+- Shift+F10: Open context menu (terminal, file explorer)
+
+### Context Menu (when context menu is open)
+
+- Up/Down: Navigate options
+- Enter: Select option
+- Escape: Close menu
+- Space: Repeat current option
+
+### Dialog (when dialog is active)
+
+- Left/Right: Navigate buttons
+- Enter: Activate button
+- Escape: Dismiss (Cancel/No/OK)
+- Up/Down: Navigate traces (game over detail view)
 
 ### File Explorer (when file explorer window is focused)
 
