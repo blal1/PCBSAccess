@@ -354,6 +354,20 @@ namespace GreyHackAccess
             _english["mail_help_inbox"] = "Mail inbox. Up Down to navigate emails, Enter to read, N to compose, Tab to switch inbox outbox, Delete to delete. F1 for help.";
             _english["mail_help_read"] = "Reading email. Alt R to read body, R to reply, Backspace to go back, Delete to delete. F1 for help.";
             _english["mail_help_compose"] = "Compose email. Tab between fields, Ctrl Enter to send, Escape to cancel. F1 for help.";
+
+            // Chat
+            _english["chat_focused"] = "Chat. Channel: {0}.";
+            _english["chat_nickname"] = "Chat. Enter a nickname to register.";
+            _english["chat_nickname_registered"] = "Nickname registered. You can now chat.";
+            _english["chat_channel_switched"] = "Channel: {0}.";
+            _english["chat_message"] = "{0}: {1}";
+            _english["chat_private_message"] = "Private from {0}: {1}";
+            _english["chat_users"] = "{0} users in {1}: {2}";
+            _english["chat_no_users"] = "No users in channel.";
+            _english["chat_no_messages"] = "No messages.";
+            _english["chat_no_channels"] = "No channels open.";
+            _english["chat_history_item"] = "{0}: {1}";
+            _english["chat_help"] = "Chat. Ctrl Up Down to read message history. Alt Left Right to switch channels. Alt U for user list. Alt C for channel list. F1 for help.";
         }
 
         #endregion
