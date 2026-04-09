@@ -197,7 +197,7 @@ namespace GreyHackAccess
         {
             if (notepad == null) return;
 
-            uDialog dialog = notepad.GetComponent<uDialog>();
+            uDialog dialog = notepad.GetComponentInParent<uDialog>();
             if (dialog == null) return;
 
             string title = dialog.TitleText ?? "";
