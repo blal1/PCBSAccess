@@ -100,6 +100,34 @@ namespace GreyHackAccess
             _english["bios_wrap_first"] = "First item";
             _english["bios_wrap_last"] = "Last item";
 
+            // BiosMenu - Language Panel
+            _english["bios_language_opened"] = "Language selection. {0} languages. Up Down to navigate, Enter to select.";
+            _english["bios_language_selected"] = "Language set to {0}";
+            _english["bios_language_help"] = "Language panel. Up Down to navigate languages. Enter to select. Backspace to go back.";
+
+            // BiosMenu - Audio Panel
+            _english["bios_audio_opened"] = "Audio settings. {0} options. Up Down to navigate, Left Right to adjust sliders, Enter to toggle.";
+            _english["bios_audio_music"] = "Music Volume";
+            _english["bios_audio_sfx"] = "SFX Volume";
+            _english["bios_audio_bg"] = "Background Audio";
+            _english["bios_audio_menu_music"] = "Main Menu Music";
+            _english["bios_audio_slider_item"] = "{2}, slider, {3} percent, {0} of {1}";
+            _english["bios_audio_slider_value"] = "{0}: {1} percent";
+            _english["bios_audio_help"] = "Audio panel. Up Down to navigate. Left Right to adjust volume. Enter to toggle. Backspace to go back.";
+
+            // BiosMenu - Graphics Panel
+            _english["bios_graphics_opened"] = "Graphics settings. {0} options. Up Down to navigate, Left Right to adjust, Enter to activate.";
+            _english["bios_graphics_dropdown"] = "{2}, dropdown, {3}, {0} of {1}";
+            _english["bios_graphics_dropdown_value"] = "{0}: {1}";
+            _english["bios_graphics_slider"] = "{2}, slider, {3}, {0} of {1}";
+            _english["bios_graphics_slider_value"] = "{0}: {1}";
+            _english["bios_graphics_help"] = "Graphics panel. Up Down to navigate. Left Right to adjust dropdowns and sliders. Enter to toggle or press button. Backspace to go back.";
+
+            // BiosMenu - Credits Panel
+            _english["bios_credits_content"] = "Credits. {0}";
+            _english["bios_credits_empty"] = "Credits.";
+            _english["bios_credits_help"] = "Credits panel. Backspace to go back.";
+
             // Boot Sequence
             _english["boot_starting"] = "Booting up. Press Delete to cancel and return to menu.";
             _english["boot_starting_first"] = "Booting up. First time setup will begin after boot.";
@@ -152,7 +180,7 @@ namespace GreyHackAccess
             _english["desktop_nav_entered"] = "Desktop icons. {0} items. Up Down to navigate, Enter to open, Escape to exit.";
             _english["desktop_nav_exited"] = "Desktop icons closed";
             _english["desktop_no_icons"] = "No desktop icons";
-            _english["desktop_icon_item"] = "{3}, {4}, {1} of {2}";
+            _english["desktop_icon_item"] = "{2}, {3}, {0} of {1}";
             _english["desktop_icon_opening"] = "Opening {0}";
             _english["desktop_icon_help"] = "Desktop icons. Up Down to navigate, Enter to open, Escape to exit, Space to repeat.";
             _english["desktop_wrap_first"] = "First item";
@@ -187,6 +215,13 @@ namespace GreyHackAccess
             _english["dialog_kernel_panic"] = "Kernel panic. System crash.";
             _english["dialog_help"] = "Dialog. Up Down or Left Right to navigate buttons, Enter to select, Escape to dismiss, Space to repeat.";
 
+            // Game Over detail view
+            _english["dialog_gameover_details_shown"] = "Details shown. {0} traces. Up Down to navigate.";
+            _english["dialog_gameover_details_hidden"] = "Details hidden.";
+            _english["dialog_gameover_trace"] = "Trace {0} of {1}: {2} {3}, action {4}, from {5}";
+            _english["dialog_gameover_copied"] = "Trace log copied to clipboard.";
+            _english["dialog_gameover_help"] = "Game over. Left Right for buttons, Enter to select. In detail view: Up Down for traces.";
+
             // Welcome Dialog
             _english["welcome_panel"] = "Tutorial setup. {0} options. Up Down to navigate, Enter to select.";
             _english["welcome_button"] = "{0}, {1} of {2}";
@@ -197,7 +232,7 @@ namespace GreyHackAccess
 
             // File Explorer
             _english["explorer_focused"] = "File explorer. {0}. {1} items.";
-            _english["explorer_file_item"] = "{3}, {4}, {1} of {2}";
+            _english["explorer_file_item"] = "{2}, {3}, {0} of {1}";
             _english["explorer_empty"] = "Folder is empty";
             _english["explorer_opening_folder"] = "Opening folder {0}";
             _english["explorer_opening_file"] = "Opening {0}";
@@ -222,6 +257,45 @@ namespace GreyHackAccess
             _english["explorer_type_program"] = "program";
             _english["explorer_type_binary"] = "binary file";
             _english["explorer_type_file"] = "file";
+
+            // Text Input Feedback
+            _english["input_backspace"] = "backspace";
+            _english["input_delete"] = "delete";
+            _english["input_deleted_chars"] = "{0} characters deleted";
+            _english["input_space"] = "space";
+            _english["input_dot"] = "dot";
+            _english["input_comma"] = "comma";
+            _english["input_slash"] = "slash";
+            _english["input_backslash"] = "backslash";
+            _english["input_dash"] = "dash";
+            _english["input_underscore"] = "underscore";
+            _english["input_at"] = "at";
+            _english["input_colon"] = "colon";
+            _english["input_semicolon"] = "semicolon";
+            _english["input_exclamation"] = "exclamation";
+            _english["input_question"] = "question";
+            _english["input_hash"] = "hash";
+            _english["input_dollar"] = "dollar";
+            _english["input_equals"] = "equals";
+            _english["input_plus"] = "plus";
+            _english["input_star"] = "star";
+            _english["input_pipe"] = "pipe";
+            _english["input_greater"] = "greater than";
+            _english["input_less"] = "less than";
+            _english["input_left_paren"] = "left paren";
+            _english["input_right_paren"] = "right paren";
+            _english["input_left_bracket"] = "left bracket";
+            _english["input_right_bracket"] = "right bracket";
+            _english["input_left_brace"] = "left brace";
+            _english["input_right_brace"] = "right brace";
+            _english["input_tilde"] = "tilde";
+            _english["input_caret"] = "caret";
+            _english["input_ampersand"] = "ampersand";
+            _english["input_percent"] = "percent";
+            _english["input_quote"] = "quote";
+            _english["input_apostrophe"] = "apostrophe";
+            _english["input_backtick"] = "backtick";
+            _english["input_tab"] = "tab";
 
             // Notifications
             _english["notif_announced"] = "{0}: {1}";
