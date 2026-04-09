@@ -32,7 +32,7 @@
 ## Current Phase
 
 **Phase:** Implementation
-**Currently working on:** Phase 2 complete (Dialogs + Context Menus). Ready for next feature.
+**Currently working on:** Phase 3 Communication complete (Notepad, Email, Chat). Ready for testing.
 **Blocked by:** Nothing
 
 ## Codebase Analysis Progress
@@ -73,6 +73,9 @@
 - Terminal auto-focus (WindowFocusHandler) - auto-selects SelectableTerminal when terminal window opens/focuses, fixes post-tutorial focus loss
 - Context menu accessibility (ContextMenuHandler) - Shift+F10 opens context menus in terminal/file explorer, Up/Down/Enter/Escape navigation
 - Game over detail view (DialogHandler) - Left/Right navigates buttons, Enter on Show Details for Up/Down trace navigation
+- Notepad accessibility (NotepadHandler) - announces file name on focus, Alt+R reads content, file loaded announcements
+- Email client accessibility (MailHandler) - inbox navigation with Up/Down, Enter to read, R to reply, N to compose, Tab to switch inbox/outbox, Delete to delete
+- Chat accessibility (ChatHandler) - Ctrl+Up/Down message history, Alt+Left/Right channel tabs, Alt+U user list, auto-announces new messages (configurable)
 
 ## Pending Tests
 
@@ -216,6 +219,42 @@
 - [ ] Enter on Copy Log: hear "Trace log copied to clipboard"
 - [ ] Enter on Close: disconnects
 
+### Notepad Handler
+
+- [ ] Open a text file from file explorer: hear "Notepad. [filename]"
+- [ ] Alt+R: hear first ~500 chars of file content
+- [ ] Alt+R on empty file: hear "File is empty"
+- [ ] F1: hear notepad help
+- [ ] Switch away and back: hear focus announcement again
+- [ ] Ctrl+S: hear save notification via NotificationHandler
+
+### Email Client (MailHandler)
+
+- [ ] Open Mail.exe: hear "Mail login" or auto-login then "Inbox. N emails."
+- [ ] Up/Down: navigate emails with position, sender, subject, read status
+- [ ] Enter: read email, hear "From [address]. Subject: [subject]."
+- [ ] Alt+R in read view: hear email body text
+- [ ] R in read view: hear "Reply. Type your message."
+- [ ] Backspace: back to inbox
+- [ ] N: compose panel opens, hear "Compose email."
+- [ ] Tab: toggle Inbox/Outbox, hear which view
+- [ ] Delete: delete email, hear confirmation
+- [ ] Space: repeat current announcement
+- [ ] F1: hear context-appropriate help
+
+### Chat (ChatHandler)
+
+- [ ] Open Chat: hear "Chat. Enter a nickname" or "Chat. Channel: general."
+- [ ] Ctrl+Up/Down: scroll through message history, hear each message
+- [ ] Alt+Left/Right: switch channels, hear channel name
+- [ ] Alt+U: hear user count and names
+- [ ] Alt+C: channel list opens
+- [ ] New message arrives: hear "[nick]: [message]" automatically
+- [ ] Private message: hear "Private from [nick]: [message]"
+- [ ] Ctrl+F11 -> toggle chat announcements off -> messages no longer auto-announced
+- [ ] Space: repeat channel info
+- [ ] F1: hear chat help
+
 ## Known Issues
 
 - (none yet)
@@ -267,8 +306,36 @@
 - F2: Rename selected file
 - Delete: Delete selected file
 
+### Notepad (when notepad window is focused)
+
+- Alt+R: Read file content
+
+### Mail (when mail window is focused)
+
+- Up/Down: Navigate email list
+- Enter: Read selected email
+- N: Compose new email
+- R: Reply to email (in read view)
+- Alt+R: Read email body (in read view)
+- Tab: Toggle Inbox/Outbox
+- Delete: Delete email
+- Backspace: Back to inbox (from read view)
+- Escape: Cancel compose
+- Ctrl+Enter: Send email (in compose)
+- Space: Repeat current
+
+### Chat (when chat window is focused)
+
+- Ctrl+Up/Down: Scroll message history
+- Alt+Left/Right: Switch channel tabs
+- Alt+U: Announce user list
+- Alt+C: Open channel list
+- Space: Repeat channel info
+
 ## Notes for Next Session
 
-- Setup is complete. Next step: first build test, then Phase 1 analysis.
+- Phase 3 Communication features implemented (Notepad, Email, Chat). All need in-game testing.
 - Grey Hack is a hacking simulator - user doesn't know the game, so explain mechanics as we discover them.
-- 2493 decompiled files available for analysis.
+- NotepadHandler: watch for HandleFileLoaded - uses GetComponentInParent<uDialog>() which should work but needs runtime verification.
+- MailHandler: uses inline reflection for OnClickMail (private method). Verify the Harmony patch fires correctly.
+- ChatHandler: message announcements are global (fire even when chat isn't focused). Configurable via Ctrl+F11 settings.
