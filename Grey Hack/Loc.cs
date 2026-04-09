@@ -315,6 +315,14 @@ namespace GreyHackAccess
             _english["notif_type_connection"] = "Connection";
             _english["notif_type_exploitreport"] = "Exploit report";
             _english["notif_type_clipboard"] = "Clipboard";
+
+            // Context Menus
+            _english["context_opened"] = "{0} options. Up Down to navigate, Enter to select, Escape to close.";
+            _english["context_item"] = "{0}, {1} of {2}";
+            _english["context_item_disabled"] = "{0}, disabled, {1} of {2}";
+            _english["context_closed"] = "Context menu closed";
+            _english["context_no_context"] = "No context menu available here";
+            _english["context_help"] = "Context menu. Up Down to navigate, Enter to select, Escape to close, Space to repeat.";
         }
 
         #endregion
