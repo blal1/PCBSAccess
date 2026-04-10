@@ -32,7 +32,7 @@
 ## Current Phase
 
 **Phase:** Implementation
-**Currently working on:** Phase 3 Communication complete (Notepad, Email, Chat). Ready for testing.
+**Currently working on:** Tutorial Handler implementation complete. Ready for testing.
 **Blocked by:** Nothing
 
 ## Codebase Analysis Progress
@@ -76,6 +76,7 @@
 - Notepad accessibility (NotepadHandler) - announces file name on focus, Alt+R reads content, file loaded announcements
 - Email client accessibility (MailHandler) - inbox navigation with Up/Down, Enter to read, R to reply, N to compose, Tab to switch inbox/outbox, Delete to delete
 - Chat accessibility (ChatHandler) - Ctrl+Up/Down message history, Alt+Left/Right channel tabs, Alt+U user list, auto-announces new messages (configurable)
+- Tutorial accessibility (TutorialHandler) - auto-reads tutorial pages, Enter to advance, Escape to skip, Space to re-read, pending action announcements, wrong action feedback
 
 ## Pending Tests
 
@@ -255,6 +256,21 @@
 - [x] Space: repeat channel info
 - [x] F1: hear chat help
 
+### Tutorial Handler
+
+- [ ] Start a new single player game (with tutorials enabled): tutorial window opens alongside file explorer
+- [ ] Tutorial opens: hear "Tutorial. Page 1 of N." followed by page text
+- [ ] Enter: advances to next page, hear new page number and text
+- [ ] Space: re-reads current page text
+- [ ] Escape: hear skip tutorial confirmation dialog (handled by DialogHandler)
+- [ ] Page with pending action: hear "Action required: [description]"
+- [ ] Complete the pending action (e.g. open terminal): tutorial auto-advances, hear new page
+- [ ] Enter on page with pending action (not completed): hear the action requirement again
+- [ ] Wrong action performed: hear the error feedback text
+- [ ] Switch to another window and back to tutorial: hear page re-announced
+- [ ] F1: hear tutorial help text
+- [ ] Last page reached with no more pages: hear "Tutorial complete."
+
 ## Known Issues
 
 - (none yet)
@@ -334,8 +350,8 @@
 
 ## Notes for Next Session
 
-- Phase 3 Communication features implemented (Notepad, Email, Chat). All need in-game testing.
+- TutorialHandler implemented and deployed. Needs in-game testing.
+- Tutorial triggers automatically when starting a new single player game with tutorials enabled.
+- The Harmony patches target private methods (ConstruyePagina, ShowWrongAction) - verify they fire at runtime.
+- Tutorial pages may contain images (skipped by handler) and [ACTION] tags (stripped, inner text kept).
 - Grey Hack is a hacking simulator - user doesn't know the game, so explain mechanics as we discover them.
-- NotepadHandler: watch for HandleFileLoaded - uses GetComponentInParent<uDialog>() which should work but needs runtime verification.
-- MailHandler: uses inline reflection for OnClickMail (private method). Verify the Harmony patch fires correctly.
-- ChatHandler: message announcements are global (fire even when chat isn't focused). Configurable via Ctrl+F11 settings.
