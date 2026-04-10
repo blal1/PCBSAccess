@@ -221,39 +221,39 @@
 
 ### Notepad Handler
 
-- [ ] Open a text file from file explorer: hear "Notepad. [filename]"
-- [ ] Alt+R: hear first ~500 chars of file content
-- [ ] Alt+R on empty file: hear "File is empty"
-- [ ] F1: hear notepad help
-- [ ] Switch away and back: hear focus announcement again
-- [ ] Ctrl+S: hear save notification via NotificationHandler
+- [x] Open a text file from file explorer: hear "Notepad. [filename]"
+- [x] Alt+R: hear first ~500 chars of file content
+- [x] Alt+R on empty file: hear "File is empty"
+- [x] F1: hear notepad help
+- [x] Switch away and back: hear focus announcement again
+- [x] Ctrl+S: hear save notification via NotificationHandler
 
 ### Email Client (MailHandler)
 
-- [ ] Open Mail.exe: hear "Mail login" or auto-login then "Inbox. N emails."
-- [ ] Up/Down: navigate emails with position, sender, subject, read status
-- [ ] Enter: read email, hear "From [address]. Subject: [subject]."
-- [ ] Alt+R in read view: hear email body text
-- [ ] R in read view: hear "Reply. Type your message."
-- [ ] Backspace: back to inbox
-- [ ] N: compose panel opens, hear "Compose email."
-- [ ] Tab: toggle Inbox/Outbox, hear which view
-- [ ] Delete: delete email, hear confirmation
-- [ ] Space: repeat current announcement
-- [ ] F1: hear context-appropriate help
+- [x] Open Mail.exe: hear "Mail login" or auto-login then "Inbox. N emails."
+- [x] Up/Down: navigate emails with position, sender, subject, read status
+- [x] Enter: read email, hear "From [address]. Subject: [subject]."
+- [x] Alt+R in read view: hear email body text
+- [x] R in read view: hear "Reply. Type your message."
+- [x] Backspace: back to inbox
+- [x] N: compose panel opens, hear "Compose email."
+- [x] Tab: toggle Inbox/Outbox, hear which view
+- [x] Delete: delete email, hear confirmation
+- [x] Space: repeat current announcement
+- [x] F1: hear context-appropriate help
 
 ### Chat (ChatHandler)
 
-- [ ] Open Chat: hear "Chat. Enter a nickname" or "Chat. Channel: general."
-- [ ] Ctrl+Up/Down: scroll through message history, hear each message
-- [ ] Alt+Left/Right: switch channels, hear channel name
-- [ ] Alt+U: hear user count and names
-- [ ] Alt+C: channel list opens
-- [ ] New message arrives: hear "[nick]: [message]" automatically
-- [ ] Private message: hear "Private from [nick]: [message]"
-- [ ] Ctrl+F11 -> toggle chat announcements off -> messages no longer auto-announced
-- [ ] Space: repeat channel info
-- [ ] F1: hear chat help
+- [x] Open Chat: hear "Chat. Enter a nickname" or "Chat. Channel: general."
+- [x] Ctrl+Up/Down: scroll through message history, hear each message
+- [x] Alt+Left/Right: switch channels, hear channel name
+- [x] Alt+U: hear user count and names
+- [x] Alt+C: channel list opens
+- [x] New message arrives: hear "[nick]: [message]" automatically
+- [x] Private message: hear "Private from [nick]: [message]"
+- [x] Ctrl+F11 -> toggle chat announcements off -> messages no longer auto-announced
+- [x] Space: repeat channel info
+- [x] F1: hear chat help
 
 ## Known Issues
 
