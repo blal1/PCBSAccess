@@ -368,6 +368,29 @@ namespace GreyHackAccess
             _english["chat_no_channels"] = "No channels open.";
             _english["chat_history_item"] = "{0}: {1}";
             _english["chat_help"] = "Chat. Ctrl Up Down to read message history. Alt Left Right to switch channels. Alt U for user list. Alt C for channel list. F1 for help.";
+
+            // Tutorial
+            _english["tutorial_focused"] = "Tutorial. Page {0} of {1}.";
+            _english["tutorial_refocused"] = "Tutorial. Page {0} of {1}.";
+            _english["tutorial_action_required"] = "Action required: {0}";
+            _english["tutorial_next_available"] = "Press Enter to continue.";
+            _english["tutorial_wrong_action"] = "{0}";
+            _english["tutorial_complete"] = "Tutorial complete.";
+            _english["tutorial_help"] = "Tutorial. Enter to go to next page. Escape to skip tutorial. Space to re-read page. F1 for help.";
+            _english["tutorial_pending_open_terminal"] = "Open the terminal.";
+            _english["tutorial_pending_launch_pwd"] = "Type pwd in the terminal.";
+            _english["tutorial_pending_launch_ls"] = "Type ls in the terminal.";
+            _english["tutorial_pending_launch_cd"] = "Type cd in the terminal.";
+            _english["tutorial_pending_launch_mkdir"] = "Type mkdir in the terminal.";
+            _english["tutorial_pending_explorer_root"] = "Navigate to the root folder.";
+            _english["tutorial_pending_explorer_bin"] = "Navigate to the bin folder.";
+            _english["tutorial_pending_explorer_usrbin"] = "Navigate to usr bin.";
+            _english["tutorial_pending_mail"] = "Check your mail.";
+            _english["tutorial_pending_remote_conn"] = "Connect to a remote computer.";
+            _english["tutorial_pending_trace_system"] = "Open the system log on the remote computer.";
+            _english["tutorial_pending_remote_explorer"] = "Open the file explorer on the remote computer.";
+            _english["tutorial_pending_create_mail_button"] = "Create a mail account.";
+            _english["tutorial_pending_select_login_issues"] = "Select login issues.";
         }
 
         #endregion
