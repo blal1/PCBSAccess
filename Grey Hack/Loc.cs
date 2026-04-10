@@ -406,6 +406,16 @@ namespace GreyHackAccess
             _english["browser_prebuy_source_on"] = "Source code included.";
             _english["browser_prebuy_source_off"] = "Source code not included.";
             _english["browser_prebuy_help"] = "Purchase dialog. Up Down to change version. Tab to toggle source code. Enter to buy. Escape to cancel.";
+
+            // Web page
+            _english["web_page"] = "Web page. {0} links.";
+            _english["web_page_no_links"] = "Web page. No interactive links.";
+            _english["web_link"] = "{0} of {1}: {2}";
+            _english["web_error_not_found"] = "Page not found.";
+            _english["web_error_url_not_found"] = "URL not found.";
+            _english["web_error_no_net"] = "No network access.";
+            _english["web_searching"] = "Searching...";
+            _english["web_help"] = "Web page. Up Down to navigate links. Enter to activate link. Alt R to read page. Space to repeat.";
         }
 
         #endregion
