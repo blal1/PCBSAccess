@@ -416,6 +416,119 @@ namespace GreyHackAccess
             _english["web_error_no_net"] = "No network access.";
             _english["web_searching"] = "Searching...";
             _english["web_help"] = "Web page. Up Down to navigate links. Enter to activate link. Alt R to read page. Space to repeat.";
+
+            // Search
+            _english["search_home"] = "Search. Type query in address bar, Enter to search.";
+            _english["search_no_net"] = "No network connection.";
+            _english["search_searching"] = "Searching...";
+            _english["search_help"] = "Search page. Type in the address bar and press Enter to search. Results appear as web page links.";
+
+            // Bank
+            _english["bank_login"] = "Bank login. Tab between fields, Enter to submit.";
+            _english["bank_register"] = "Bank registration. Tab between fields, Enter to submit.";
+            _english["bank_logging_in"] = "Logging in...";
+            _english["bank_creating"] = "Creating account...";
+            _english["bank_registered"] = "Account created. Account number: {0}. {1}";
+            _english["bank_account"] = "Bank account. Balance: {0}. {1} transactions.";
+            _english["bank_transaction"] = "{0} of {1}: {2}";
+            _english["bank_no_transactions"] = "No transactions.";
+            _english["bank_balance"] = "Balance: {0}.";
+            _english["bank_help_login"] = "Bank login. Tab between account and password fields. Enter to log in.";
+            _english["bank_help_register"] = "Bank registration. Tab between fields. Enter to register.";
+            _english["bank_help_account"] = "Bank account. Up Down to browse transactions. Space to repeat balance. Tab to transfer fields.";
+
+            // Shop
+            _english["shop_loaded"] = "Shop. {0} items. Up Down to browse, Enter to buy.";
+            _english["shop_item"] = "{0} of {1}: {2}. {3}. ${4}";
+            _english["shop_item_hw"] = "{0} of {1}: {2}. {3}. {4}. ${5}";
+            _english["shop_empty"] = "Shop. No items available.";
+            _english["shop_filter"] = "Filter: {0}";
+            _english["shop_help"] = "Shop. Up Down to browse items. Enter to buy. Alt F to change filter. Space to repeat.";
+
+            // Hack shop
+            _english["hackshop_tools"] = "Hack shop tools. {0} items. Up Down to browse, Enter to buy.";
+            _english["hackshop_exploits"] = "Hack shop exploits. Select library and version to search.";
+            _english["hackshop_exploits_results"] = "Found {0} exploits. Up Down to browse.";
+            _english["hackshop_item"] = "{0} of {1}: {2}. {3}. ${4}";
+            _english["hackshop_exploit_item"] = "{0} of {1}: {2}. Service: {3}. ${4}. {5}";
+            _english["hackshop_empty"] = "No items available.";
+            _english["hackshop_filter"] = "Library: {0}";
+            _english["hackshop_perm_filter"] = "Permission: {0}";
+            _english["hackshop_help_tools"] = "Hack shop tools. Up Down to browse. Enter to buy. Alt F to change filter. Space to repeat.";
+            _english["hackshop_help_exploits"] = "Hack shop exploits. Alt F to select library. Type version and Enter to search. Up Down to browse results. Enter to buy. Alt P for permission filter.";
+
+            // Router - Port Forwarding
+            _english["router_ports"] = "Port forwarding. {0} rules. Up Down to browse, Enter to edit, N to add new.";
+            _english["router_port_rule"] = "Rule {0} of {1}: External {2} to {3}:{4}.{5}";
+            _english["router_port_protected"] = " Protected.";
+            _english["router_port_empty"] = "Port forwarding. No rules.";
+            _english["router_port_editing"] = "Editing rule. Tab between fields, Enter to save, Escape to cancel.";
+            _english["router_port_field"] = "{0}: {1}";
+            _english["router_port_saved"] = "Rule saved.";
+            _english["router_port_cancelled"] = "Edit cancelled.";
+            _english["router_port_deleted"] = "Deleted {0} rules.";
+            _english["router_port_protected_no_edit"] = "Protected rule. Cannot edit.";
+            _english["router_port_help"] = "Port forwarding. Up Down to browse rules. Enter to edit. N to add. Delete to remove. Space to repeat.";
+
+            // Router - Firewall
+            _english["router_firewall"] = "Firewall rules. {0} rules. Up Down to browse, Enter to edit, N to add new.";
+            _english["router_fw_rule"] = "Rule {0} of {1}: {2} port {3} from {4} to {5}.";
+            _english["router_fw_empty"] = "Firewall. No rules.";
+            _english["router_fw_editing"] = "Editing firewall rule. Tab between fields, Enter to save, Escape to cancel.";
+            _english["router_fw_field"] = "{0}: {1}";
+            _english["router_fw_action_toggle"] = "Action: {0}";
+            _english["router_fw_any_on"] = "{0} set to Any.";
+            _english["router_fw_any_off"] = "{0} restored to {1}.";
+            _english["router_fw_saved"] = "Rule saved.";
+            _english["router_fw_cancelled"] = "Edit cancelled.";
+            _english["router_fw_deleted"] = "Deleted {0} rules.";
+            _english["router_fw_help"] = "Firewall rules. Up Down to browse. Enter to edit. N to add. Delete to remove. In edit mode: Tab between fields, Left Right for Allow Deny, Alt A to toggle Any.";
+
+            // Router help
+            _english["router_help_panel"] = "Router help.";
+            _english["router_help_text"] = "Router help. Alt R to read help content.";
+
+            // Jobs
+            _english["jobs_panel"] = "Jobs. {0} missions. Up Down to browse, Enter for details.";
+            _english["jobs_police"] = "Police jobs. {0} missions. Up Down to browse, Enter for details.";
+            _english["jobs_item"] = "{0} of {1}: {2}. {3}";
+            _english["jobs_item_rep"] = "{0} of {1}: {2}. Reputation {3}. {4}";
+            _english["jobs_empty"] = "No missions available.";
+            _english["jobs_detail"] = "Mission: {0}. {1}";
+            _english["jobs_back"] = "Back to job list.";
+            _english["jobs_help"] = "Jobs. Up Down to browse missions. Enter to view details. Backspace to go back. Space to repeat.";
+
+            // Police
+            _english["police_report"] = "Police report. Enter IP address and attach evidence file.";
+            _english["police_submitted"] = "Report submitted.";
+            _english["police_help"] = "Police report. Tab between IP field and attach button. Enter to submit. Space to repeat.";
+
+            // CCTV
+            _english["cctv_active"] = "CCTV camera. {0}W A S D to pan. Zoom in and out with plus and minus.";
+            _english["cctv_title"] = "Camera: {0}. ";
+            _english["cctv_password"] = "Enter camera password.";
+            _english["cctv_help"] = "CCTV camera. W A S D to pan camera. This is a visual-only feed.";
+
+            // ISP
+            _english["isp_panel"] = "ISP configuration. Choose a package or manage your domain.";
+            _english["isp_help"] = "ISP panel. Use Tab to navigate options. Enter to select.";
+
+            // Currency
+            _english["currency_panel"] = "Create cryptocurrency. Enter coin name, username, and password. Cost: $150.";
+            _english["currency_help"] = "Cryptocurrency creation. Tab between fields. Enter to create. Cost is $150.";
+
+            // CTF
+            _english["ctf_panel"] = "CTF events. {0} missions. Up Down to browse, Enter for details.";
+            _english["ctf_empty"] = "CTF events. No missions available.";
+            _english["ctf_item"] = "{0} of {1}: {2}. By {3}. {4}";
+            _english["ctf_detail"] = "CTF: {0}. {1}";
+            _english["ctf_back"] = "Back to CTF list.";
+            _english["ctf_help"] = "CTF events. Up Down to browse. Enter for details. Backspace to go back.";
+
+            // Find Device
+            _english["finddevice_panel"] = "Device manual finder. Type device model and search.";
+            _english["finddevice_result"] = "Manual: {0}. Model: {1}.";
+            _english["finddevice_help"] = "Device manual finder. Type a model name and press Enter to search. Alt R to read manual.";
         }
 
         #endregion

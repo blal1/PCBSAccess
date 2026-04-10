@@ -1,13 +1,36 @@
+using UnityEngine;
+
 namespace GreyHackAccess
 {
-    /// <summary>Sub-handler for cryptocurrency creation. Full implementation in later task.</summary>
+    /// <summary>
+    /// Sub-handler for cryptocurrency creation panel.
+    /// </summary>
     public class CurrencySubHandler : ISubHandler
     {
-        public void Activate(HtmlBrowser browser) { }
-        public void Deactivate() { }
-        public bool HandleInput() { return false; }
-        public void AnnounceState() { }
-        public string GetPanelName() { return "Create Cryptocurrency"; }
-        public string GetHelpText() { return Loc.Get("browser_help"); }
+        private HtmlBrowser _browser;
+        private bool _isActive;
+
+        public void Activate(HtmlBrowser browser)
+        {
+            _browser = browser;
+            _isActive = true;
+            AnnounceState();
+        }
+
+        public void Deactivate() { _isActive = false; }
+
+        public bool HandleInput()
+        {
+            return false;
+        }
+
+        public void AnnounceState()
+        {
+            ScreenReader.Say(Loc.Get("currency_panel"));
+        }
+
+        public string GetPanelName() => "Create Cryptocurrency";
+
+        public string GetHelpText() => Loc.Get("currency_help");
     }
 }
