@@ -32,6 +32,7 @@ namespace GreyHackAccess
         private NotepadHandler _notepadHandler;
         private MailHandler _mailHandler;
         private ChatHandler _chatHandler;
+        private TutorialHandler _tutorialHandler;
         private Harmony _harmony;
 
         /// <summary>
@@ -117,6 +118,9 @@ namespace GreyHackAccess
 
             _chatHandler = new ChatHandler();
             _chatHandler.Register();
+
+            _tutorialHandler = new TutorialHandler();
+            _tutorialHandler.Register();
         }
 
         private IEnumerator AnnounceStartupDelayed()
@@ -238,6 +242,9 @@ namespace GreyHackAccess
             // Welcome dialog consumes input when active
             if (_welcomeHandler.Update()) return;
 
+            // Tutorial consumes input when active
+            if (_tutorialHandler.Update()) return;
+
             // Start menu consumes input when active
             if (_startMenuHandler.Update()) return;
 
@@ -284,6 +291,12 @@ namespace GreyHackAccess
             if (_welcomeHandler.IsActive)
             {
                 ScreenReader.Say(_welcomeHandler.GetHelpText());
+                return;
+            }
+
+            if (_tutorialHandler.IsActive)
+            {
+                ScreenReader.Say(_tutorialHandler.GetHelpText());
                 return;
             }
 
