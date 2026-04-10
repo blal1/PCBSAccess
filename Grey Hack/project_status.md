@@ -32,7 +32,7 @@
 ## Current Phase
 
 **Phase:** Implementation
-**Currently working on:** Tutorial Handler implementation complete. Ready for testing.
+**Currently working on:** Phase 4 Browser Handler implementation complete. Ready for in-game testing.
 **Blocked by:** Nothing
 
 ## Codebase Analysis Progress
@@ -77,6 +77,7 @@
 - Email client accessibility (MailHandler) - inbox navigation with Up/Down, Enter to read, R to reply, N to compose, Tab to switch inbox/outbox, Delete to delete
 - Chat accessibility (ChatHandler) - Ctrl+Up/Down message history, Alt+Left/Right channel tabs, Alt+U user list, auto-announces new messages (configurable)
 - Tutorial accessibility (TutorialHandler) - auto-reads tutorial pages, Enter to advance, Escape to skip, Space to re-read, pending action announcements, wrong action feedback
+- Browser accessibility (BrowserHandler + 15 sub-handlers) - coordinator pattern with panel-specific sub-handlers for all HtmlBrowser panels: web pages, search, bank (login/register/account), shop, hack shop (tools/exploits), router config (ports/firewall/help), jobs, police reports, CCTV, ISP, cryptocurrency, CTF, device finder. PreBuy dialog handling for purchases.
 
 ## Pending Tests
 
@@ -258,18 +259,47 @@
 
 ### Tutorial Handler
 
-- [ ] Start a new single player game (with tutorials enabled): tutorial window opens alongside file explorer
-- [ ] Tutorial opens: hear "Tutorial. Page 1 of N." followed by page text
-- [ ] Enter: advances to next page, hear new page number and text
-- [ ] Space: re-reads current page text
-- [ ] Escape: hear skip tutorial confirmation dialog (handled by DialogHandler)
-- [ ] Page with pending action: hear "Action required: [description]"
-- [ ] Complete the pending action (e.g. open terminal): tutorial auto-advances, hear new page
-- [ ] Enter on page with pending action (not completed): hear the action requirement again
-- [ ] Wrong action performed: hear the error feedback text
-- [ ] Switch to another window and back to tutorial: hear page re-announced
-- [ ] F1: hear tutorial help text
-- [ ] Last page reached with no more pages: hear "Tutorial complete."
+- [x] Start a new single player game (with tutorials enabled): tutorial window opens alongside file explorer
+- [x] Tutorial opens: hear "Tutorial. Page 1 of N." followed by page text
+- [x] Enter: advances to next page, hear new page number and text
+- [x] Space: re-reads current page text
+- [x] Escape: hear skip tutorial confirmation dialog (handled by DialogHandler)
+- [x] Page with pending action: hear "Action required: [description]"
+- [x] Complete the pending action (e.g. open terminal): tutorial auto-advances, hear new page
+- [x] Enter on page with pending action (not completed): hear the action requirement again
+- [x] Wrong action performed: hear the error feedback text
+- [x] Switch to another window and back to tutorial: hear page re-announced
+- [x] F1: hear tutorial help text
+- [x] Last page reached with no more pages: hear "Tutorial complete."
+
+### Browser Handler
+
+- [ ] Open browser: hear panel announcement (e.g. "Search. Type query...")
+- [ ] Visit a website: hear "Web page. N links."
+- [ ] Up/Down on web page: navigate links with position
+- [ ] Enter on link: activates link, panel switches
+- [ ] Alt+Left/Right: browser back/forward announced
+- [ ] Alt+Home: navigate to search home
+- [ ] Alt+R: read current page content
+- [ ] Navigate to bank login: hear "Bank login."
+- [ ] Log in: hear "Logging in..." then account info
+- [ ] Up/Down in bank account: browse transactions
+- [ ] Open shop: hear "Shop. N items."
+- [ ] Up/Down in shop: browse items with name, description, price
+- [ ] Enter on item: PreBuy dialog announced with name, price
+- [ ] Up/Down in PreBuy: cycle versions, Tab toggles source code
+- [ ] Enter in PreBuy: buy, Escape to cancel
+- [ ] Open hack shop: hear tools/exploits panel
+- [ ] Alt+F: cycle library/filter
+- [ ] Open router config: hear port forwarding rules or firewall rules
+- [ ] Enter on port rule: edit mode with Tab field cycling
+- [ ] N to add rule, Delete to remove
+- [ ] Firewall: Left/Right for Allow/Deny, Alt+A for Any toggle
+- [ ] Open jobs: hear mission count, Up/Down browse, Enter for details
+- [ ] CCTV: hear camera info
+- [ ] ISP, Currency, CTF, FindDevice panels: each announced on activation
+- [ ] F1 in any browser panel: hear panel-specific help
+- [ ] Space in browser: repeat current state
 
 ## Known Issues
 
@@ -348,10 +378,30 @@
 - Alt+C: Open channel list
 - Space: Repeat channel info
 
+### Browser (when browser window is focused)
+
+- Alt+Left: Go back in browser history
+- Alt+Right: Go forward in browser history
+- Alt+Home: Go to search home page
+- Alt+R: Read current page/panel content
+- Space: Repeat current state
+- Up/Down: Navigate links/items/rules (panel-dependent)
+- Enter: Activate link/buy/edit (panel-dependent)
+- Tab: Cycle fields (bank/router edit mode)
+- N: Add new rule (router config)
+- Delete: Remove rule (router config)
+- Left/Right: Toggle Allow/Deny (firewall edit mode)
+- Alt+A: Toggle Any (firewall edit mode)
+- Alt+F: Cycle filter/library (shop/hack shop)
+- Alt+P: Cycle permission filter (hack shop exploits)
+- Backspace: Back from detail view (jobs/CTF)
+
 ## Notes for Next Session
 
-- TutorialHandler implemented and deployed. Needs in-game testing.
-- Tutorial triggers automatically when starting a new single player game with tutorials enabled.
-- The Harmony patches target private methods (ConstruyePagina, ShowWrongAction) - verify they fire at runtime.
-- Tutorial pages may contain images (skipped by handler) and [ACTION] tags (stripped, inner text kept).
+- Phase 4 BrowserHandler + 15 sub-handlers implemented and deployed. Needs in-game testing.
+- BrowserPanel mirror enum used because HtmlBrowser.SubPanelWebs is private. Values match exactly.
+- Reflection used for: currentPanel, bankListAdapter, panelCustom (PowerUI), various item lists.
+- PowerUI Document DOM used for extracting web page buttons (getElementsByClassName).
+- PreBuy/PreBuyHardware dialogs handled at coordinator level, not in sub-handlers.
+- Some game classes (ISPPanel, CTFPanel, DeviceManualUI) may have different field names at runtime - verify.
 - Grey Hack is a hacking simulator - user doesn't know the game, so explain mechanics as we discover them.
