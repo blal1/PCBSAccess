@@ -391,6 +391,21 @@ namespace GreyHackAccess
             _english["tutorial_pending_remote_explorer"] = "Open the file explorer on the remote computer.";
             _english["tutorial_pending_create_mail_button"] = "Create a mail account.";
             _english["tutorial_pending_select_login_issues"] = "Select login issues.";
+
+            // Browser
+            _english["browser_focused"] = "Browser. {0}";
+            _english["browser_loading"] = "Loading {0}";
+            _english["browser_back"] = "Back.";
+            _english["browser_forward"] = "Forward.";
+            _english["browser_home"] = "Home.";
+            _english["browser_no_history"] = "No more history.";
+            _english["browser_help"] = "Browser. Alt Left and Right for history. Alt Home for search. Alt R to read content. Up Down to navigate. Enter to select. F1 for help.";
+            _english["browser_prebuy"] = "Purchase: {0}. Price: ${1}. {2}";
+            _english["browser_prebuy_coupons"] = "{0} coupons.";
+            _english["browser_prebuy_version"] = "Version: {0}.";
+            _english["browser_prebuy_source_on"] = "Source code included.";
+            _english["browser_prebuy_source_off"] = "Source code not included.";
+            _english["browser_prebuy_help"] = "Purchase dialog. Up Down to change version. Tab to toggle source code. Enter to buy. Escape to cancel.";
         }
 
         #endregion

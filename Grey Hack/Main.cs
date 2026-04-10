@@ -33,6 +33,7 @@ namespace GreyHackAccess
         private MailHandler _mailHandler;
         private ChatHandler _chatHandler;
         private TutorialHandler _tutorialHandler;
+        private BrowserHandler _browserHandler;
         private Harmony _harmony;
 
         /// <summary>
@@ -121,6 +122,9 @@ namespace GreyHackAccess
 
             _tutorialHandler = new TutorialHandler();
             _tutorialHandler.Register();
+
+            _browserHandler = new BrowserHandler();
+            _browserHandler.Register();
         }
 
         private IEnumerator AnnounceStartupDelayed()
@@ -263,6 +267,9 @@ namespace GreyHackAccess
             // Chat consumes input when active
             if (_chatHandler.Update()) return;
 
+            // Browser consumes input when active
+            if (_browserHandler.Update()) return;
+
             _biosMenuHandler.Update();
             _bootUpHandler.Update();
             _terminalHandler.Update();
@@ -345,6 +352,12 @@ namespace GreyHackAccess
             if (_chatHandler.IsActive)
             {
                 ScreenReader.Say(_chatHandler.GetHelpText());
+                return;
+            }
+
+            if (_browserHandler.IsActive)
+            {
+                ScreenReader.Say(_browserHandler.GetHelpText());
                 return;
             }
 
