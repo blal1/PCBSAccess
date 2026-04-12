@@ -1,0 +1,61 @@
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
+namespace NAMESPACE
+{
+    /// <summary>
+    /// Utility for extracting text from various Unity UI components.
+    /// Supports TextMeshProUGUI, legacy Text, and Buttons.
+    /// </summary>
+    public static class UITextExtractor
+    {
+        /// <summary>
+        /// Gets text from a GameObject by checking common UI components.
+        /// </summary>
+        /// <param name="obj">The GameObject to extract text from.</param>
+        /// <returns>The extracted text, or null if no supported component is found.</returns>
+        public static string GetText(GameObject obj)
+        {
+            if (obj == null) return null;
+
+            // Try TextMeshPro
+            var tmp = obj.GetComponent<TextMeshProUGUI>();
+            if (tmp != null) return tmp.text;
+
+            // Try legacy Text
+            var txt = obj.GetComponent<Text>();
+            if (txt != null) return txt.text;
+
+            // Try Button (usually has a Text or TMP child)
+            var btn = obj.GetComponent<Button>();
+            if (btn != null)
+            {
+                // Check children for text components
+                var childTmp = obj.GetComponentInChildren<TextMeshProUGUI>();
+                if (childTmp != null) return childTmp.text;
+
+                var childTxt = obj.GetComponentInChildren<Text>();
+                if (childTxt != null) return childTxt.text;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets text from a Component's GameObject.
+        /// </summary>
+        public static string GetText(Component comp)
+        {
+            return comp != null ? GetText(comp.gameObject) : null;
+        }
+
+        /// <summary>
+        /// Checks if a GameObject has any extractable text.
+        /// </summary>
+        public static bool HasText(GameObject obj)
+        {
+            return !string.IsNullOrEmpty(GetText(obj));
+        }
+    }
+}
