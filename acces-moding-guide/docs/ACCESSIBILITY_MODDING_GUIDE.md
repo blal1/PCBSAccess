@@ -280,7 +280,7 @@ Bevor du Code schreibst, stelle sicher:
 - [ ] Exakte Klassennamen notiert (Groß-/Kleinschreibung!)
 - [ ] Zugriffsmethode verstanden (Singleton? FindObjectOfType? Referenz?)
 - [ ] Öffentliche API der Klasse bekannt (Methoden, Properties)
-- [ ] Erkenntnisse in `docs/game-api.md` dokumentiert
+- [ ] Erkenntnisse in [docs/game-api.md](game-api.md) dokumentiert
 
 #### Beispiel: Falsches vs. Richtiges Vorgehen
 
@@ -726,3 +726,4 @@ if (Input.GetKey(KeyCode.LeftShift)) { }  // Held down
 6. **Use queued for details** - Don't interrupt main info
 7. **Consistent patterns** - Same actions = same announcements
 8. **Enable logging** - Essential for debugging
+or debugging

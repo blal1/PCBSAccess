@@ -78,7 +78,7 @@ Read the repository's LICENSE file before starting work. Common licenses:
 - **GPL:** Must share modifications under same license (fine for accessibility mods — they should be open anyway)
 - **Custom / "source available":** Read carefully — may restrict modifications or redistribution
 
-If the license is unclear, note this in `project_status.md` and suggest the user ask the developers.
+If the license is unclear, note this in [project_status.md](project_status.md) and suggest the user ask the developers.
 
 **Adapted setup steps for direct source work:**
 1. Clone the repository to a local directory
@@ -179,7 +179,7 @@ Perform these checks and collect the results:
 5b. **Check Known Issues (`docs/known-issues.md`):**
    - Read `docs/known-issues.md` and check ALL categories against the detected configuration (engine, version, mod loader)
    - If any entry matches: **immediately warn the user** with the issue description and workaround
-   - Log any matched warnings in `project_status.md` under a "Known Issues" section
+   - Log any matched warnings in [project_status.md](project_status.md) under a "Known Issues" section
    - If a match has no workaround, discuss alternatives with the user before continuing setup
 
 6. **Check Tolk DLLs:**
@@ -626,7 +626,7 @@ Suggest trying the mod loader that matches the game's runtime (MelonLoader for I
 
 **After installation:** Continue with Step 5 (Tolk).
 
-**Record the chosen mod loader** in `project_status.md` — it affects the project structure, build configuration, and code templates.
+**Record the chosen mod loader** in [project_status.md](project_status.md) — it affects the project structure, build configuration, and code templates.
 
 **Template selection based on mod loader:**
 
@@ -795,7 +795,7 @@ Question: Which languages should the mod support? Recommend starting with 1-3:
 If the mod will support more than one language:
 - The game's language system must be analyzed during decompilation
 - Search for: `Language`, `Localization`, `I18n`, `currentLanguage`, `getAlias()`
-- See `localization-guide.md` for complete instructions
+- See [localization-guide.md](localization-guide.md) for complete instructions
 
 Use `templates/shared/Loc.cs.template` as starting point (always, regardless of language count).
 
@@ -803,22 +803,22 @@ Use `templates/shared/Loc.cs.template` as starting point (always, regardless of 
 
 After the interview:
 - **Determine mod name:** `[GameName]Access` - abbreviate if 3+ words (e.g., "PetIdleAccess", "DsaAccess" for "Das Schwarze Auge")
-- Create `project_status.md` from `templates/shared/project_status.md.template` - fill in all collected information and check off completed setup steps. **This is the central tracking document for the entire project.** Update it at every significant milestone: features completed, bugs discovered, architecture decisions, notes for the next session.
+- Create [project_status.md](project_status.md) from `templates/shared/project_status.md.template` - fill in all collected information and check off completed setup steps. **This is the central tracking document for the entire project.** Update it at every significant milestone: features completed, bugs discovered, architecture decisions, notes for the next session.
 - Create `docs/game-api.md` from `templates/shared/game-api.md.template` as placeholder for game discoveries
 - Enter the concrete paths in CLAUDE.md under "Environment"
 
 #### Trim CLAUDE.md after setup
 
-Once `project_status.md` is created, trim CLAUDE.md to save tokens for the rest of the project:
+Once [project_status.md](project_status.md) is created, trim CLAUDE.md to save tokens for the rest of the project:
 
 1. **Replace the "Project Start" section** with:
    ```
    ## Session Start
    On greeting:
-   1. Read `project_status.md` — summarize phase, last work, pending tests, notes
+   1. Read [project_status.md](project_status.md) — summarize phase, last work, pending tests, notes
    2. If pending tests exist, ask user for results before continuing
    3. Suggest next steps or ask what to work on
-   Update `project_status.md` on significant progress and before session end.
+   Update [project_status.md](project_status.md) on significant progress and before session end.
    ```
 
 2. **Remove from References:**
@@ -854,8 +854,8 @@ Claude Code re-reads the entire conversation every time you send a message. This
 
 - **Start a new conversation** whenever you finish a feature or a distinct task. Don't keep going in the same conversation for hours.
 - **Roughly 30-40 messages** is a good point to consider starting fresh.
-- **Before starting a new conversation:** Claude should always update `project_status.md` so the next conversation knows exactly where things stand.
-- **When you come back:** Just say "hello" or "let's continue" - Claude reads `project_status.md` and picks up where you left off.
+- **Before starting a new conversation:** Claude should always update [project_status.md](project_status.md) so the next conversation knows exactly where things stand.
+- **When you come back:** Just say "hello" or "let's continue" - Claude reads [project_status.md](project_status.md) and picks up where you left off.
 
 This is not a limitation but a workflow advantage: fresh conversations have a clear context and make fewer mistakes.
 
@@ -868,17 +868,17 @@ This is not a limitation but a workflow advantage: fresh conversations have a cl
 ### What you need to do
 
 - **Starting a session:** Just say "hello", "let's continue", or jump straight in with "I tested the menu, here's what happened: ..."
-- **You don't need to repeat** the game name, the project setup, what was done before, or technical details. Claude reads `project_status.md` and knows all of that.
+- **You don't need to repeat** the game name, the project setup, what was done before, or technical details. Claude reads [project_status.md](project_status.md) and knows all of that.
 - **Reporting test results:** Just describe what happened naturally. "The menu works but item 3 is skipped" or "Nothing happens when I press F2" is enough. Claude will ask follow-up questions if needed.
 - **Requesting features:** "Let's do the inventory next" or "Can we add health announcements?" — Claude checks the feature plan and starts working.
 - **If something feels wrong:** "I think X broke since last time" — Claude will investigate.
 
 ### What Claude does automatically
 
-1. Reads `project_status.md` — knows current phase, all features, issues, and notes from last session
+1. Reads [project_status.md](project_status.md) — knows current phase, all features, issues, and notes from last session
 2. If there are pending tests, asks you about the results
 3. Suggests what to work on next (or asks)
-4. Before the session ends, updates `project_status.md` with everything that happened
+4. Before the session ends, updates [project_status.md](project_status.md) with everything that happened
 
 ### The cycle
 
@@ -895,7 +895,7 @@ Session start → Claude reads project_status.md → summarizes → asks what to
 - **Game updated and mod broke:** Tell Claude, it will check what changed
 - **You forgot what was planned:** Just say "hello" — Claude tells you
 - **You want to change direction:** Just say so, Claude adapts the plan
-- **You lost your test notes:** Claude can rebuild context from `project_status.md` and the code
+- **You lost your test notes:** Claude can rebuild context from [project_status.md](project_status.md) and the code
 
 ---
 
@@ -964,7 +964,7 @@ netstandard2.0 is only an API specification, not a runtime. Mono has compatibili
 1. **Developer name wrong** = Mod loads but OnInitializeMelon() is never called. No error in log, just silence.
 2. **Framework wrong** = Mod loads but cannot execute. No error in log, just silence.
 
-**For crashes or silent failures:** Read `technical-reference.md` section "CRITICAL: Accessing Game Code".
+**For crashes or silent failures:** Read [technical-reference.md](technical-reference.md) section "CRITICAL: Accessing Game Code".
 
 ### For BepInEx
 
@@ -1099,7 +1099,7 @@ Grep pattern: class.*InputManager
 **MANDATORY OUTPUT — do this NOW, not later:**
 1. Write ALL found key bindings to `docs/game-api.md` section "Game Key Bindings"
 2. Write the safe mod keys list to `docs/game-api.md` section "Safe Mod Keys"
-3. Update `project_status.md` — check off "Input system" items
+3. Update [project_status.md](project_status.md) — check off "Input system" items
 
 **Do NOT proceed to 1.3 until both sections are written in game-api.md!** This is the single most common source of bugs (mod keys conflicting with game controls) and the step most often skipped.
 
@@ -1185,9 +1185,9 @@ Count the screens/features from the UI analysis where the same keys (especially 
 
 **Decision:**
 - **3+ handlers sharing keys** → Use `AccessStateManager` (create from `templates/shared/AccessStateManager.cs.template` in Phase 2)
-- **1-2 handlers** → Simple boolean flags are enough (see `state-management-guide.md`)
+- **1-2 handlers** → Simple boolean flags are enough (see [state-management-guide.md](state-management-guide.md))
 
-**Document the decision** in `project_status.md` under "Architecture Decisions" with the reasoning.
+**Document the decision** in [project_status.md](project_status.md) under "Architecture Decisions" with the reasoning.
 
 #### 1.5 Localization System (Tier 1 - If multilingual)
 
@@ -1225,9 +1225,9 @@ See `docs/localization-guide.md` for complete instructions on building multiling
 1. `docs/game-api.md` has a complete "Game Key Bindings" section with ALL keys the game uses
 2. `docs/game-api.md` has a "Safe Mod Keys" section listing keys the mod can safely use
 3. `docs/game-api.md` has UI base classes and text access patterns documented
-4. `project_status.md` has all Tier 1 checkboxes checked
-5. `project_status.md` "Game Key Bindings (Original)" section is filled in
-6. State management decision documented in `project_status.md` "Architecture Decisions"
+4. [project_status.md](project_status.md) has all Tier 1 checkboxes checked
+5. [project_status.md](project_status.md) "Game Key Bindings (Original)" section is filled in
+6. State management decision documented in [project_status.md](project_status.md) "Architecture Decisions"
 7. If multilingual: game's language detection documented in `docs/game-api.md`
 
 **If any of these are missing, go back and do them now.** Every single mod bug from key conflicts could have been prevented by completing this gate properly.
@@ -1559,7 +1559,7 @@ Example addition:
    - Reuse known patterns
    - **Check UI Analysis section** - How to access text for this UI type?
 2. Check feature plan entry (dependencies fulfilled?)
-3. For menus: Work through `menu-accessibility-checklist.md`
+3. For menus: Work through [menu-accessibility-checklist.md](menu-accessibility-checklist.md)
 4. **For UI features:** Check if Reflection is needed (see `docs/unity-reflection-guide.md`)
 5. **For 3+ handlers on same keys:** Consider state management (see `docs/state-management-guide.md`)
 
@@ -1570,7 +1570,7 @@ Example addition:
 - Documented patterns can be directly reused
 - **UI access patterns are already solved** - don't reinvent the wheel
 
-See `ACCESSIBILITY_MODDING_GUIDE.md` for code patterns.
+See [ACCESSIBILITY_MODDING_GUIDE.md](ACCESSIBILITY_MODDING_GUIDE.md) for code patterns.
 
 **Feature order:** Build accessibility features in the order a player encounters them in the game:
 
