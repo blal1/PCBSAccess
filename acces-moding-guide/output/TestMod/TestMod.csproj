@@ -1,0 +1,99 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- WICHTIG: TargetFramework passend zum Spiel wählen!
+         Die meisten BepInEx Mono-Spiele: net472
+         Neuere Spiele mit .NET 6+: net6.0
+         Prüfe was andere BepInEx-Mods für dieses Spiel verwenden -->
+    <TargetFramework>net472</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <AssemblyName>TestMod</AssemblyName>
+    <RootNamespace>TestMod</RootNamespace>
+  </PropertyGroup>
+
+  <!-- WICHTIG: Dekompilierte Dateien vom Build ausschließen! -->
+  <ItemGroup>
+    <Compile Remove="decompiled\**" />
+    <Compile Remove="templates\**" />
+  </ItemGroup>
+
+  <!-- BepInEx Referenzen -->
+  <ItemGroup>
+    <Reference Include="BepInEx">
+      <HintPath>C:\Path\To\Your\Game\BepInEx\core\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>C:\Path\To\Your\Game\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Unity Referenzen (aus dem Spiel-Managed-Ordner) -->
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Path\To\Your\Game\TestGame_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Path\To\Your\Game\TestGame_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>C:\Path\To\Your\Game\TestGame_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:\Path\To\Your\Game\TestGame_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>C:\Path\To\Your\Game\TestGame_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Spiel-Assembly -->
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\Path\To\Your\Game\TestGame_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Nach Build: DLL in BepInEx plugins-Ordner kopieren -->
+  <Target Name="CopyToPlugins" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="C:\Path\To\Your\Game\BepInEx\plugins\" />
+    <Message Text="Copied $(TargetFileName) to BepInEx plugins folder" Importance="High" />
+  </Target>
+
+</Project>
+
+<!--
+ANLEITUNG - Platzhalter ersetzen:
+
+1. net472:
+   - Die meisten BepInEx Mono-Spiele: net472
+   - Neuere Spiele (.NET 6+): net6.0
+   - Prüfe was andere BepInEx-Mods verwenden oder die DLLs in BepInEx/core/
+
+2. C:\Path\To\Your\Game: Der volle Pfad zum Spiel, z.B.:
+   C:\Program Files (x86)\Steam\steamapps\common\Spielname
+
+3. TestGame: Name des Spiels (für den _Data Ordner), z.B.:
+   Pet Idle → Pet Idle_Data
+
+4. TestMod und TestMod: Dein Mod-Name, z.B.:
+   PetIdleAccessibility
+
+CHECKLISTE VOR BUILD:
+[ ] TargetFramework passend gewählt
+[ ] Alle C:\Path\To\Your\Game ersetzt
+[ ] Alle TestGame ersetzt
+[ ] decompiled und templates werden ausgeschlossen
+[ ] Output geht nach BepInEx\plugins\ (nicht Mods\)
+-->
+
