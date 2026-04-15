@@ -32,7 +32,7 @@
 ## Current Phase
 
 **Phase:** Implementation
-**Currently working on:** Phase 4 Browser Handler implementation complete. Ready for in-game testing.
+**Currently working on:** Session 2026-04-16 complete. Mission system (Phase 5) implemented and all in-game tests passing.
 **Blocked by:** Nothing
 
 ## Codebase Analysis Progress
@@ -78,6 +78,14 @@
 - Chat accessibility (ChatHandler) - Ctrl+Up/Down message history, Alt+Left/Right channel tabs, Alt+U user list, auto-announces new messages (configurable)
 - Tutorial accessibility (TutorialHandler) - auto-reads tutorial pages, Enter to advance, Escape to skip, Space to re-read, pending action announcements, wrong action feedback
 - Browser accessibility (BrowserHandler + 15 sub-handlers) - coordinator pattern with panel-specific sub-handlers for all HtmlBrowser panels: web pages, search, bank (login/register/account), shop, hack shop (tools/exploits), router config (ports/firewall/help), jobs, police reports, CCTV, ISP, cryptocurrency, CTF, device finder. PreBuy dialog handling for purchases.
+- Translation editor accessibility (TranslationWindowHandler) - navigate translation keys, read English text, edit translations, search keys, save, undo/redo, preview language, publish to Steam Workshop, Ctrl+Shift+C batch copy keys, Ctrl+Shift+V batch paste translations
+- Terminal autocomplete announcement (TerminalResumeAutoCompletePatch) - "Completed: X" on single-token Tab, "No match" when empty
+- Terminal caret navigation (TerminalListAdapterMoveCaretPatch) - letter-by-letter Left/Right announce via Data property (not field injection)
+- Terminal word jump (Shift+Left/Right) - jumps to word boundary, announces skipped word, suppresses per-char patch during loop
+- Terminal output history scroll (Ctrl+Up/Down) - circular buffer of announced output, navigate backwards/forwards
+- Terminal folder change detection - polls GetCurrentFolder() each frame, announces on cd
+- SpecsReader SystemInfo fallback - Ctrl+Alt+H from main menu/BIOS screen reads SystemInfo.processorType, frequency, RAM, GPU
+- Mission system accessibility (MissionHandler + MissionPatches) - announces PanelMission contract dialog (title, type, reward, difficulty, description), Left/Right/Enter/Escape navigation for Accept/Decline, Alt+M to re-read last accepted mission
 
 ## Pending Tests
 
@@ -215,11 +223,11 @@
 
 ### Game Over Detail View (deferred)
 
-- [ ] Game over appears: hear title, message, button count
-- [ ] Left/Right navigates buttons
-- [ ] Enter on Show Details: hear trace count, Up/Down navigates traces
-- [ ] Enter on Copy Log: hear "Trace log copied to clipboard"
-- [ ] Enter on Close: disconnects
+- [x] Game over appears: hear title, message, button count
+- [x] Left/Right navigates buttons
+- [x] Enter on Show Details: hear trace count, Up/Down navigates traces
+- [x] Enter on Copy Log: hear "Trace log copied to clipboard"
+- [x] Enter on Close: disconnects
 
 ### Notepad Handler
 
@@ -274,32 +282,77 @@
 
 ### Browser Handler
 
-- [ ] Open browser: hear panel announcement (e.g. "Search. Type query...")
-- [ ] Visit a website: hear "Web page. N links."
-- [ ] Up/Down on web page: navigate links with position
-- [ ] Enter on link: activates link, panel switches
-- [ ] Alt+Left/Right: browser back/forward announced
-- [ ] Alt+Home: navigate to search home
-- [ ] Alt+R: read current page content
-- [ ] Navigate to bank login: hear "Bank login."
-- [ ] Log in: hear "Logging in..." then account info
-- [ ] Up/Down in bank account: browse transactions
-- [ ] Open shop: hear "Shop. N items."
-- [ ] Up/Down in shop: browse items with name, description, price
-- [ ] Enter on item: PreBuy dialog announced with name, price
-- [ ] Up/Down in PreBuy: cycle versions, Tab toggles source code
-- [ ] Enter in PreBuy: buy, Escape to cancel
-- [ ] Open hack shop: hear tools/exploits panel
-- [ ] Alt+F: cycle library/filter
-- [ ] Open router config: hear port forwarding rules or firewall rules
-- [ ] Enter on port rule: edit mode with Tab field cycling
-- [ ] N to add rule, Delete to remove
-- [ ] Firewall: Left/Right for Allow/Deny, Alt+A for Any toggle
-- [ ] Open jobs: hear mission count, Up/Down browse, Enter for details
-- [ ] CCTV: hear camera info
-- [ ] ISP, Currency, CTF, FindDevice panels: each announced on activation
-- [ ] F1 in any browser panel: hear panel-specific help
-- [ ] Space in browser: repeat current state
+- [x] Open browser: hear panel announcement (e.g. "Search. Type query...")
+- [x] Visit a website: hear "Web page. N links."
+- [x] Up/Down on web page: navigate links with position
+- [x] Enter on link: activates link, panel switches
+- [x] Alt+Left/Right: browser back/forward announced
+- [x] Alt+Home: navigate to search home
+- [x] Alt+R: read current page content
+- [x] Navigate to bank login: hear "Bank login."
+- [x] Log in: hear "Logging in..." then account info
+- [x] Up/Down in bank account: browse transactions
+- [x] Open shop: hear "Shop. N items."
+- [x] Up/Down in shop: browse items with name, description, price
+- [x] Enter on item: PreBuy dialog announced with name, price
+- [x] Up/Down in PreBuy: cycle versions, Tab toggles source code
+- [x] Enter in PreBuy: buy, Escape to cancel
+- [x] Open hack shop: hear tools/exploits panel
+- [x] Alt+F: cycle library/filter
+- [x] Open router config: hear port forwarding rules or firewall rules
+- [x] Enter on port rule: edit mode with Tab field cycling
+- [x] N to add rule, Delete to remove
+- [x] Firewall: Left/Right for Allow/Deny, Alt+A for Any toggle
+- [x] Open jobs: hear mission count, Up/Down browse, Enter for details
+- [x] CCTV: hear camera info
+- [x] ISP, Currency, CTF, FindDevice panels: each announced on activation
+- [x] F1 in any browser panel: hear panel-specific help
+- [x] Space in browser: repeat current state
+
+### Translation Editor
+
+- [x] Enable Editor in play options, start single player game
+- [x] Open Translation editor: hear "Translation editor. N keys to translate."
+- [x] Type language name (e.g., "French"), press Enter: hear "Language French created."
+- [x] Alt+Right: next key, hear key number, name, status, English preview
+- [x] Alt+Left: previous key
+- [x] Alt+R: hear full English text for current key
+- [x] Alt+T: hear current translation (or "Translation is empty")
+- [x] Alt+E: focus translation input field, type translation text
+- [x] Escape: unfocus field, hear "Editing finished. Text saved."
+- [x] Ctrl+S: hear "Translation saved."
+- [x] Ctrl+Z: undo last edit
+- [x] Ctrl+Y: redo
+- [x] Alt+F: open search, type keyword, Tab to search, Up/Down results, Enter to select
+- [x] Alt+G: go to key number
+- [x] Alt+P: preview language in game
+- [x] Alt+W: open Workshop publish panel
+- [x] Alt+C: copy translation file path to clipboard
+- [x] Ctrl+Shift+C: batch copy all keys (key[TAB]english) to clipboard
+- [x] Ctrl+Shift+V: batch paste translations from clipboard (key[TAB]translation), auto-saves
+- [x] Space: repeat current key info
+- [x] F1: hear context-specific help
+
+### Mission System (2026-04-16 session)
+
+- [x] Open browser → jobs panel → Enter on a job → hear full mission announcement (title, type, reward, difficulty, description)
+- [x] Left → hear "Decline", Right → hear "Accept"
+- [x] Enter on Accept → hear "Mission accepted.", dialog closes
+- [x] Enter on Decline / Escape → hear "Mission declined.", dialog closes
+- [x] Space → repeat full announcement
+- [x] F1 → hear mission help text
+- [x] After accepting, Alt+M → hear active mission summary
+- [x] Alt+M before any mission → hear "No active mission."
+- [x] Close via X button → no crash, Alt+M shows previously accepted mission
+
+### Terminal Advanced (2026-04-15 session)
+
+- [x] Tab autocomplete: hear "Completed: X" on single match, "No match" on empty
+- [x] Left/Right arrows: hear character under caret letter by letter
+- [x] Shift+Left/Right: word jump, hear word skipped
+- [x] Ctrl+Up/Down: scroll output history, hear past announced lines
+- [x] cd to folder: hear new folder path automatically
+- [x] Ctrl+Alt+H from main menu/BIOS: hear CPU model, speed, RAM, GPU via SystemInfo
 
 ## Known Issues
 
@@ -396,12 +449,57 @@
 - Alt+P: Cycle permission filter (hack shop exploits)
 - Backspace: Back from detail view (jobs/CTF)
 
+### Translation Editor (when translation window is focused)
+
+- Alt+Left: Previous key
+- Alt+Right: Next key
+- Alt+R: Read English text
+- Alt+T: Read current translation
+- Alt+E: Focus translation input field
+- Escape: Unfocus input field (saves text)
+- Ctrl+S: Save translation
+- Ctrl+Z: Undo
+- Ctrl+Y: Redo
+- Alt+F: Open key search
+- Alt+G: Go to key number
+- Alt+P: Preview language in game
+- Alt+W: Open Workshop publish panel
+- Alt+C: Copy translation file path
+- Ctrl+Shift+C: Batch copy all keys to clipboard (key[TAB]english format)
+- Ctrl+Shift+V: Batch paste translations from clipboard (key[TAB]translation format)
+- Space: Repeat current key info
+
+### Mission Panel (when PanelMission dialog is open)
+
+- Left/Right: Navigate Accept/Decline
+- Enter: Activate selected button
+- Escape: Decline and close
+- Space: Repeat mission announcement
+- Alt+M: Re-read active mission (global, any time)
+- F1: Help
+
+### Terminal Advanced
+
+- Left/Right: Letter-by-letter caret navigation
+- Shift+Left/Right: Word jump (announces skipped word)
+- Ctrl+Up/Down: Scroll output history (past announced lines)
+- Tab: Autocomplete (announces result or "No match")
+
 ## Notes for Next Session
 
-- Phase 4 BrowserHandler + 15 sub-handlers implemented and deployed. Needs in-game testing.
+- All features from this branch (001-matchmaking-screen) tested and passing as of 2026-04-15.
 - BrowserPanel mirror enum used because HtmlBrowser.SubPanelWebs is private. Values match exactly.
-- Reflection used for: currentPanel, bankListAdapter, panelCustom (PowerUI), various item lists.
+- Reflection used for: currentPanel, bankListAdapter, panelCustom (PowerUI), workshopItem, various item lists.
 - PowerUI Document DOM used for extracting web page buttons (getElementsByClassName).
 - PreBuy/PreBuyHardware dialogs handled at coordinator level, not in sub-handlers.
-- Some game classes (ISPPanel, CTFPanel, DeviceManualUI) may have different field names at runtime - verify.
+- TerminalListAdapter.Data is a public property (SimpleDataHelper<T>), not a field — use __instance.Data, not ___Data injection.
+- StringCompressor is internal — replicated gzip decode inline in TerminalResumeAutoCompletePatch.
+- SuppressCaretAnnounce flag needed in TerminalHandler during Shift+word-jump loop to prevent per-char spam.
+- SpecsReader now has two paths: game Hardware (in-session) and SystemInfo (main menu / BIOS screen).
+- Translation batch copy/paste: workshopItem is private — access via ReflectionHelper.GetPrivateField.
 - Grey Hack is a hacking simulator - user doesn't know the game, so explain mechanics as we discover them.
+- Translation editor requires "Enable Editor" checked in play options to be available in-game.
+- Game has built-in English + Spanish; community translations via Steam Workshop JSON files.
+- Possible next features: matchmaking screen accessibility (branch name suggests this was the original goal), PoliceSubHandler / remaining browser sub-handlers, game-over dialog full test.
+- MissionHandler.OnCancelar Prefix fires when keyboard presses Escape (via _panel.OnCancelar() direct call) AND when user clicks button — both paths are safe, no double announce.
+- rep values for difficulty: 0=Easy, 1=Medium, 2+=Hard (from DirectMission.minRep/maxRep in mission preview config).
