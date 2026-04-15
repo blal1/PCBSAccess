@@ -6,9 +6,6 @@ namespace GreyHackAccess
     /// <summary>
     /// Harmony patches for mission panel accessibility.
     /// Captures PanelMission lifecycle events and forwards to MissionHandler.
-    /// </summary>
-
-    /// <summary>
     /// Fires after AddMission sets up the dialog content.
     /// Passes the fully-populated PanelMission and mission data to MissionHandler.
     /// </summary>
