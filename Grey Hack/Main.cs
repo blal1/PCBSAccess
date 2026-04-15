@@ -34,6 +34,8 @@ namespace GreyHackAccess
         private ChatHandler _chatHandler;
         private TutorialHandler _tutorialHandler;
         private BrowserHandler _browserHandler;
+        private TranslationWindowHandler _translationWindowHandler;
+        private MissionHandler _missionHandler;
         private Harmony _harmony;
 
         /// <summary>
@@ -125,6 +127,12 @@ namespace GreyHackAccess
 
             _browserHandler = new BrowserHandler();
             _browserHandler.Register();
+
+            _translationWindowHandler = new TranslationWindowHandler();
+            _translationWindowHandler.Register();
+
+            _missionHandler = new MissionHandler();
+            _missionHandler.Register();
         }
 
         private IEnumerator AnnounceStartupDelayed()
@@ -216,6 +224,30 @@ namespace GreyHackAccess
                 return true;
             }
 
+            // Alt+M = Active mission
+            if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.M))
+            {
+                DebugLogger.LogInput("Alt+M", "Active mission");
+                _missionHandler.AnnounceActiveMission();
+                return true;
+            }
+
+            // Ctrl+Alt+T = Launch Translation Editor window
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.T))
+            {
+                DebugLogger.LogInput("Ctrl+Alt+T", "Launch translation editor");
+                TranslationWindowHandler.LaunchFromHotkey();
+                return true;
+            }
+
+            // Ctrl+Alt+H = Read full system specs
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.H))
+            {
+                DebugLogger.LogInput("Ctrl+Alt+H", "Read full system specs");
+                SpecsReader.AnnounceFullSpecs();
+                return true;
+            }
+
             // Shift+F10 = Context menu (for non-file-explorer contexts)
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F10))
             {
@@ -242,6 +274,9 @@ namespace GreyHackAccess
 
             // Error/question dialogs consume input when active
             if (_dialogHandler.Update()) return;
+
+            // Mission panel consumes input when active
+            if (_missionHandler.Update()) return;
 
             // Welcome dialog consumes input when active
             if (_welcomeHandler.Update()) return;
@@ -270,6 +305,9 @@ namespace GreyHackAccess
             // Browser consumes input when active
             if (_browserHandler.Update()) return;
 
+            // Translation window consumes input when active
+            if (_translationWindowHandler.Update()) return;
+
             _biosMenuHandler.Update();
             _bootUpHandler.Update();
             _terminalHandler.Update();
@@ -292,6 +330,12 @@ namespace GreyHackAccess
             if (_dialogHandler.IsActive)
             {
                 ScreenReader.Say(_dialogHandler.GetHelpText());
+                return;
+            }
+
+            if (_missionHandler.IsActive)
+            {
+                ScreenReader.Say(_missionHandler.GetHelpText());
                 return;
             }
 
@@ -358,6 +402,12 @@ namespace GreyHackAccess
             if (_browserHandler.IsActive)
             {
                 ScreenReader.Say(_browserHandler.GetHelpText());
+                return;
+            }
+
+            if (_translationWindowHandler.IsActive)
+            {
+                ScreenReader.Say(_translationWindowHandler.GetHelpText());
                 return;
             }
 
