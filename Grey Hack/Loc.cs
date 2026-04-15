@@ -132,6 +132,11 @@ namespace GreyHackAccess
             _english["boot_starting"] = "Booting up. Press Delete to cancel and return to menu.";
             _english["boot_starting_first"] = "Booting up. First time setup will begin after boot.";
             _english["boot_starting_safe"] = "Booting into safe mode.";
+            _english["boot_specs"] = "CPU: {0}. RAM: {1} megabytes.";
+            _english["boot_specs_unknown"] = "System specs not available.";
+            _english["boot_specs_cpu_only"] = "CPU: {0}.";
+            _english["boot_memory_ok"] = "Memory test OK.";
+            _english["boot_os_loading"] = "Loading operating system.";
             _english["boot_desktop_ready"] = "Desktop loaded.";
             _english["boot_help_bios"] = "Computer is booting. Press Delete to cancel and return to menu.";
             _english["boot_help_wait"] = "Please wait, loading.";
@@ -160,7 +165,13 @@ namespace GreyHackAccess
             _english["terminal_focus_remote"] = "Terminal. {0} at {1}, remote: {2}";
             _english["terminal_history"] = "{0}";
             _english["terminal_output_long"] = "{0} lines. {1}. Last: {2}";
-            _english["terminal_help"] = "Terminal. Type commands and press Enter. Up Down for command history. Ctrl C cancel command.";
+            _english["terminal_help"] = "Terminal. Type commands and press Enter. Up Down for command history. Shift Left Right jump words. Ctrl Up Down review output. Left Right letter by letter. Ctrl C cancel.";
+            _english["terminal_autocomplete_none"] = "No match";
+            _english["terminal_autocomplete_result"] = "Completed: {0}";
+            _english["terminal_caret_end"] = "End of line";
+            _english["terminal_caret_char"] = "{0}";
+            _english["terminal_folder_changed"] = "{0}";
+            _english["terminal_output_history_empty"] = "No output history";
 
             // Window Focus
             _english["window_opened"] = "{0}, opened";
@@ -498,6 +509,29 @@ namespace GreyHackAccess
             _english["jobs_back"] = "Back to job list.";
             _english["jobs_help"] = "Jobs. Up Down to browse missions. Enter to view details. Backspace to go back. Space to repeat.";
 
+            // Mission Panel
+            _english["mission_panel"] = "{0}. Type: {1}. Reward: {2}. Difficulty: {3}. {4}. Left Right to choose, Enter to accept, Escape to decline.";
+            _english["mission_panel_nodesc"] = "{0}. Type: {1}. Reward: {2}. Difficulty: {3}. Left Right to choose, Enter to accept, Escape to decline.";
+            _english["mission_accepted"] = "Mission accepted.";
+            _english["mission_declined"] = "Mission declined.";
+            _english["mission_nav_accept"] = "Accept";
+            _english["mission_nav_decline"] = "Decline";
+            _english["mission_diff_easy"] = "Easy";
+            _english["mission_diff_medium"] = "Medium";
+            _english["mission_diff_hard"] = "Hard";
+            _english["mission_active"] = "Active mission. {0}: {1}. {2}";
+            _english["mission_none"] = "No active mission.";
+            _english["mission_help"] = "Mission contract. Left Right to navigate Accept Decline. Enter to confirm. Escape to decline. Space to repeat.";
+            _english["mission_type_tutorial"] = "Tutorial";
+            _english["mission_type_credentials"] = "Steal credentials";
+            _english["mission_type_academic"] = "Academic record";
+            _english["mission_type_police"] = "Police record";
+            _english["mission_type_destroy"] = "Destroy computer";
+            _english["mission_type_stealfile"] = "Steal file";
+            _english["mission_type_deletefile"] = "Delete file";
+            _english["mission_type_findhacker"] = "Find hacker";
+            _english["mission_type_findevidence"] = "Find evidence";
+
             // Police
             _english["police_report"] = "Police report. Enter IP address and attach evidence file.";
             _english["police_submitted"] = "Report submitted.";
@@ -529,6 +563,63 @@ namespace GreyHackAccess
             _english["finddevice_panel"] = "Device manual finder. Type device model and search.";
             _english["finddevice_result"] = "Manual: {0}. Model: {1}.";
             _english["finddevice_help"] = "Device manual finder. Type a model name and press Enter to search. Alt R to read manual.";
+
+            // Translation Window
+            _english["trans_langname_mode"] = "Translation editor. {0} keys to translate. Type a language name and press Enter to start.";
+            _english["trans_language_created"] = "Language {0} created. Translation editor ready.";
+            _english["trans_editing_mode"] = "Translation editor. Keys {0}. Alt Left Right to navigate keys. Alt R to read English. Alt E to edit. Ctrl S to save.";
+            _english["trans_key_announced"] = "Key {0}. {1}. {2}. {3}";
+            _english["trans_status_translated"] = "translated";
+            _english["trans_status_empty"] = "not translated";
+            _english["trans_english_content"] = "English: {0}";
+            _english["trans_english_empty"] = "English text is empty.";
+            _english["trans_no_english"] = "No English text available.";
+            _english["trans_translation_content"] = "Translation: {0}";
+            _english["trans_translation_empty"] = "Translation is empty.";
+            _english["trans_edit_field_empty"] = "Translation field. Empty. Type your translation.";
+            _english["trans_edit_field_content"] = "Translation field. {0}";
+            _english["trans_input_unfocused"] = "Editing finished. Text saved.";
+            _english["trans_saved"] = "Translation saved.";
+            _english["trans_first_key"] = "Already at first key.";
+            _english["trans_last_key"] = "Already at last key.";
+            _english["trans_undo"] = "Undo. {0}";
+            _english["trans_redo"] = "Redo. {0}";
+            _english["trans_no_undo"] = "Nothing to undo.";
+            _english["trans_no_redo"] = "Nothing to redo.";
+            _english["trans_preview_applied"] = "Translation preview applied to the game.";
+            _english["trans_search_opened"] = "Key search. Type a keyword and press Tab to search. Up Down to browse results. Enter to select. Escape to close.";
+            _english["trans_search_input_focused"] = "Search field. Type a keyword.";
+            _english["trans_search_no_results"] = "No results found.";
+            _english["trans_search_result"] = "{0} of {1}: {2}";
+            _english["trans_search_wrap_first"] = "First result";
+            _english["trans_search_wrap_last"] = "Last result";
+            _english["trans_pagesearch_opened"] = "Go to key number. Type a number and press Enter.";
+            _english["trans_upload_opened"] = "{0}. Tab between title, description, and changelog fields. Enter to publish. Escape to cancel.";
+            _english["trans_upload_cancelled"] = "Upload cancelled.";
+            _english["trans_upload_status"] = "Upload status: {0}";
+            _english["trans_help_langname"] = "Translation editor. Type a language name in the field and press Enter to start translating. The editor will show all game text keys one by one.";
+            _english["trans_help_editing"] = "Translation editor. Alt Left and Right to navigate keys. Alt R to read English text. Alt T to read your translation. Alt E to edit translation field. Escape to stop editing. Ctrl S to save. Ctrl Z to undo. Ctrl Y to redo. Alt F to search keys. Alt G to go to key number. Alt P to preview language in game. Alt W to publish. Alt C to copy file path. Ctrl Shift C to copy all keys to clipboard. Ctrl Shift V to paste translations from clipboard.";
+            _english["trans_batch_copied"] = "Copied {0} keys to clipboard. Translate in a text editor then use Ctrl Shift V to paste back.";
+            _english["trans_batch_pasted"] = "Applied {0} translations. {1} lines skipped.";
+            _english["trans_batch_unavailable"] = "Translation data not available.";
+            _english["trans_batch_no_session"] = "No translation session active.";
+            _english["trans_batch_clipboard_empty"] = "Clipboard is empty.";
+            _english["trans_help_search"] = "Key search. Type keyword and press Tab to search. Up Down to browse results. Enter to select a key. Escape to close search.";
+            _english["trans_help_upload"] = "Workshop upload. Tab between fields. Enter to publish. Escape to cancel. Alt R to read upload status.";
+            _english["trans_launch_opening"] = "Opening Translation Editor.";
+            _english["trans_launch_unavailable"] = "Translation Editor not available. Launch a single player game first.";
+            _english["trans_language_empty"] = "Language name is empty. Type a name then press Enter.";
+            _english["specs_heading"] = "System specs:";
+            _english["specs_cpu"] = "CPU {0}: {1}.";
+            _english["specs_ram"] = "RAM: {0} modules, {1} megabytes total.";
+            _english["specs_gpu"] = "GPU: {0}.";
+            _english["specs_disk"] = "Disk: {0}, {1} megabytes.";
+            _english["specs_motherboard"] = "Motherboard: {0}.";
+            _english["specs_psu"] = "Power supply: {0}, {1} watts.";
+            _english["specs_network_count"] = "Network devices: {0}.";
+            _english["specs_unavailable"] = "System specs not available. Start a single player game first.";
+            _english["specs_sysinfo_cpu"] = "CPU: {0}, {1}";
+            _english["specs_sysinfo_ram"] = "RAM: {0} MB";
         }
 
         #endregion
