@@ -141,9 +141,9 @@ namespace PCBSAccess
                     return;
                 }
 
-                string text = $"{Loc.Get("cash")}: {career.m_cash}. " +
-                              $"{Loc.Get("kudos")}: {career.m_kudos}. " +
-                              $"{Loc.Get("rating")}: {career.m_starRating} {Loc.Get("stars")}.";
+                string text = $"{Loc.Get("cash")}: {career.GetCash()}. " +
+                              $"{Loc.Get("kudos")}: {career.GetKudos()}. " +
+                              $"{Loc.Get("rating")}: {career.GetStarRating():F1} {Loc.Get("stars")}.";
 
                 ScreenReader.Say(text);
             }
