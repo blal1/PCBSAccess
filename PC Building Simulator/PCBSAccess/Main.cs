@@ -92,7 +92,11 @@ namespace PCBSAccess
                     DebugLogger.LogState("Game ready.");
                 }
             }
-            catch { }
+            catch (System.Exception ex)
+            {
+                // GameController not yet available — expected during scene load
+                DebugLogger.LogGame("CheckGameReady", ex.Message);
+            }
 
             return _gameReady;
         }

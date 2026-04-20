@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using I2.Loc;
 
@@ -36,8 +37,9 @@ namespace PCBSAccess
                 string lang = LocalizationManager.CurrentLanguage;
                 _current = lang == "French" ? _french : _english;
             }
-            catch
+            catch (Exception ex)
             {
+                Main.Log?.LogWarning($"[Loc] LocalizationManager unavailable, using English: {ex.Message}");
                 _current = _english;
             }
         }

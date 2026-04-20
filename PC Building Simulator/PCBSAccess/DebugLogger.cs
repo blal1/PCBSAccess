@@ -45,7 +45,7 @@ namespace PCBSAccess
         /// <summary>Log a warning (null check failures, unexpected state). Always logs, not gated by DebugMode.</summary>
         public static void LogWarning(string message)
         {
-            Main.Log.LogWarning($"[WARN] {message}");
+            Main.Log?.LogWarning($"[WARN] {message}");
         }
     }
 }

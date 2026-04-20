@@ -111,14 +111,16 @@ namespace PCBSAccess
         public static void Stop()
         {
             if (!_available) return;
-            try { Tolk_Silence(); } catch { }
+            try { Tolk_Silence(); }
+            catch (Exception ex) { Main.Log?.LogWarning($"[ScreenReader] Stop failed: {ex.Message}"); }
         }
 
         /// <summary>Shuts down Tolk. Call from Main.OnDestroy().</summary>
         public static void Shutdown()
         {
             if (!_initialized) return;
-            try { Tolk_Unload(); } catch { }
+            try { Tolk_Unload(); }
+            catch (Exception ex) { Main.Log?.LogWarning($"[ScreenReader] Shutdown failed: {ex.Message}"); }
             _initialized = false;
             _available = false;
         }
