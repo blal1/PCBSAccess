@@ -1,0 +1,34 @@
+﻿# Code Index for Main.cs
+
+- Line 11: /// <summary>
+- Line 12: /// PCBSAccess — accessibility mod for PC Building Simulator.
+- Line 13: /// Entry point: initializes framework, applies Harmony patches, polls hotkeys.
+- Line 14: /// Keep this class small — all feature logic goes in Handler classes.
+- Line 15: /// </summary>
+- Line 17: public class Main : BaseUnityPlugin
+- Line 21: /// <summary>Global instance for running Coroutines from static handlers.</summary>
+- Line 24: /// <summary>True when game singletons are ready for access.</summary>
+- Line 27: /// <summary>When true, DebugLogger writes to the BepInEx log. Toggle with F12.</summary>
+- Line 30: /// <summary>BepInEx logger — accessible from all framework classes via Main.Log.</summary>
+- Line 37: private static void Step(string s) { if (Log != null) Log.LogInfo($"[PCBSAccess] STEP {s}"); }
+- Line 55: /// <summary>Announces startup, logs the current scene, and activates the right handler
+- Line 56: /// if we started inside the main menu (logo splash may have already completed).</summary>
+- Line 57: private IEnumerator StartupCoroutine()
+- Line 104: private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+- Line 154: /// <summary>Waits one frame so MainMenu MonoBehaviour has finished Awake/Start
+- Line 155: /// before we try to scan its buttons.</summary>
+- Line 156: private IEnumerator ActivateMainMenuAfterOneFrame()
+- Line 163: /// <summary>Waits 2 s for the scene to fully initialize, then announces the loc string.</summary>
+- Line 164: private IEnumerator AnnounceSceneLoaded(string locKey)
+- Line 174: /// <summary>
+- Line 175: /// Applies Harmony patches one by one with individual try-catch.
+- Line 176: /// Prevents a single failing patch (e.g. PCBSInput not yet ready) from
+- Line 177: /// aborting all subsequent patches and crashing Awake().
+- Line 178: /// No LINQ — avoids System.Core resolution issues in Unity Mono.
+- Line 179: /// </summary>
+- Line 180: private static void ApplyPatches(Harmony harmony)
+- Line 206: private static Type[] GetAssemblyTypes()
+- Line 231: private bool CheckGameReady()
+- Line 256: /// <summary>Processes global hotkeys. Returns true if a key was consumed.</summary>
+- Line 257: private bool ProcessHotkeys()
+- Line 380: private void AnnounceCareerStatus()

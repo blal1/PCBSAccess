@@ -1,0 +1,22 @@
+﻿# Code Index for IInputContext.cs
+
+- Line 3: /// <summary>
+- Line 4: /// Implemented by any handler that wants exclusive navigation key input
+- Line 5: /// while it is the topmost active context on the InputRouter stack.
+- Line 6: ///
+- Line 7: /// Usage:
+- Line 8: ///   1. Create a private nested class Context : IInputContext inside your handler.
+- Line 9: ///   2. Call InputRouter.Push(_ctx) when your handler opens.
+- Line 10: ///   3. Call InputRouter.Pop(_ctx) when it closes (Reset, patch, or polling close).
+- Line 11: ///   4. InputRouter auto-pops if IsActive returns false.
+- Line 12: /// </summary>
+- Line 13: public interface IInputContext
+- Line 15: /// <summary>Human-readable name used in debug logs.</summary>
+- Line 18: /// <summary>
+- Line 19: /// Called each frame by InputRouter when this context is on top.
+- Line 20: /// Return true if any key was consumed (stops further processing for this frame).
+- Line 21: /// </summary>
+- Line 24: /// <summary>
+- Line 25: /// Returns false when the context should auto-pop itself (e.g. menu closed externally).
+- Line 26: /// InputRouter checks this each frame before routing input.
+- Line 27: /// </summary>

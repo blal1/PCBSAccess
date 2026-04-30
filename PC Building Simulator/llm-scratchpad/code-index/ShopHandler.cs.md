@@ -1,0 +1,42 @@
+﻿# Code Index for ShopHandler.cs
+
+- Line 8: /// <summary>
+- Line 9: /// Announces shop items when browsing the in-game shop.
+- Line 10: ///
+- Line 11: /// Up/Down: navigate items (X of Y format).
+- Line 12: /// Home: jump to first item.
+- Line 13: /// End:  jump to last item.
+- Line 14: /// Numpad1 (wired in Main): re-read the focused item.
+- Line 15: /// Announces category name + item count on category select.
+- Line 16: /// </summary>
+- Line 17: public static class ShopHandler
+- Line 32: private sealed class Context : IInputContext, IHelpContext
+- Line 37: public bool HandleInput()
+- Line 45: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_shop")); }
+- Line 54: /// <summary>Re-reads the focused shop item. Called from Main on Numpad1.</summary>
+- Line 55: public static void AnnounceCurrentItem()
+- Line 68: /// <summary>Resets on scene change.</summary>
+- Line 69: public static void Reset()
+- Line 81: private static bool IsShopItemListVisible()
+- Line 96: private static ShopItem[] GetItems()
+- Line 106: private static void Navigate(int direction)
+- Line 135: private static void NavigateTo(int index)
+- Line 150: private static void NavigateToEnd()
+- Line 161: private static void AnnounceItem(ShopItem item, int total)
+- Line 185: private static bool IsLocked(ShopItem item)
+- Line 204: /// <summary>
+- Line 205: /// Fires when a shop category is selected or items are reconstructed.
+- Line 206: /// Captures Shop reference, resets index, announces category + count.
+- Line 207: /// </summary>
+- Line 209: static class Shop_ConstructItems_Patch
+- Line 211: static void Postfix(Shop __instance)
+- Line 232: private static System.Collections.IEnumerator AnnounceCategoryAfterFrame()
+- Line 255: /// <summary>Fires when the shop item detail page is shown. Announces full item details.</summary>
+- Line 257: static class Shop_OnShowItem_Patch
+- Line 259: static void Postfix(ShopEntry item)
+- Line 279: /// <summary>Fires when an item is added to cart. Announces confirmation.</summary>
+- Line 281: static class Shop_AddItem_Patch
+- Line 283: static void Postfix(ShopEntry entry)
+- Line 297: /// <summary>Fires when the checkout page is built. Reads cart contents and total.</summary>
+- Line 299: static class Shop_ConstructCheckout_Patch
+- Line 301: static void Postfix(Shop __instance)

@@ -1,0 +1,53 @@
+﻿# Code Index for OSHandler.cs
+
+- Line 9: /// <summary>
+- Line 10: /// Announces the in-game virtual OS desktop icons and start menu items.
+- Line 11: ///
+- Line 12: /// Desktop: Up/Down/Home/End navigate icons; Enter launches the focused icon.
+- Line 13: /// Start menu: Up/Down navigate items; Enter launches; Escape closes.
+- Line 14: /// Windows key or game button toggles the start menu on top of the desktop context.
+- Line 15: ///
+- Line 16: /// Uses a single IInputContext for both modes, with _startMenuOpen as internal flag.
+- Line 17: /// </summary>
+- Line 18: public static class OSHandler
+- Line 33: private sealed class Context : IInputContext, IHelpContext
+- Line 38: public bool HandleInput()
+- Line 45: private bool HandleStartMenu()
+- Line 57: private bool HandleDesktop()
+- Line 67: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_os")); }
+- Line 76: /// <summary>Resets on scene change.</summary>
+- Line 77: public static void Reset()
+- Line 88: /// <summary>Returns a human-readable list of all open window titles — used by F11.</summary>
+- Line 89: public static string GetOpenWindowNames()
+- Line 116: private static void RefreshIcons()
+- Line 124: private static void NavIcons(int dir)
+- Line 140: private static void NavIconsTo(int index)
+- Line 148: private static void AnnounceIcon(ProgramIcon icon, int pos, int total)
+- Line 163: private static void LaunchFocused()
+- Line 174: private static void ToggleStartMenu()
+- Line 181: private static void NavStart(int dir)
+- Line 194: private static void NavStartTo(int index)
+- Line 201: private static void LaunchFromStart()
+- Line 208: private static void AnnounceStartItem(int idx)
+- Line 224: private static void RefreshStartItems()
+- Line 247: /// <summary>Fires when the OS boots up. Saves reference and announces desktop.</summary>
+- Line 249: static class OS_OnStartup_Patch
+- Line 251: static void Postfix(OS __instance)
+- Line 271: /// <summary>Fires when an OS program is launched.</summary>
+- Line 273: static class OS_Launch_Patch
+- Line 275: static void Postfix(OSProgramDesc desc)
+- Line 289: /// <summary>Fires when a window is closed.</summary>
+- Line 291: static class OS_CloseWindow_Patch
+- Line 293: static void Postfix(WindowFrame wf)
+- Line 307: /// <summary>Fires when the start menu is toggled. Refreshes items and announces.</summary>
+- Line 309: static class OS_OnOpenStartMenu_Patch
+- Line 311: static void Postfix()
+- Line 337: /// <summary>Fires when the OS shuts down.</summary>
+- Line 339: static class OS_OnShutdown_Patch
+- Line 341: static void Postfix()
+- Line 355: /// <summary>Fires when a new email is received. Announces badge.</summary>
+- Line 357: static class OS_OnNewEmail_Patch
+- Line 359: static void Postfix()
+- Line 366: /// <summary>Fires when a window is brought to the front (focused).</summary>
+- Line 368: static class OS_BringToFront_Patch
+- Line 370: static void Postfix(WindowFrame wf)

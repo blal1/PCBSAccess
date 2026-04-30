@@ -1,0 +1,48 @@
+﻿# Code Index for WorkshopNavigatorHandler.cs
+
+- Line 8: public static class WorkshopNavigatorHandler
+- Line 68: private sealed class Context : IInputContext, IHelpContext
+- Line 73: public bool HandleInput()
+- Line 90: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_workshopnav")); }
+- Line 99: public static void Reset()
+- Line 110: public static void PollState()
+- Line 158: private static State GetCurrentState()
+- Line 165: private static bool IsWorkshopState(State s)
+- Line 176: private static Case GetCase(State s)     => _wcsBaseCase?.GetValue(s) as Case;
+- Line 177: private static Camera GetCamera(State s) => _wcsBaseCamera?.GetValue(s) as Camera;
+- Line 179: private static Case GetHBPCCase(HBPCStateBase s)     => _hbpcCase?.GetValue(s) as Case;
+- Line 180: private static Camera GetHBPCCamera(HBPCStateBase s) => _hbpcCamera?.GetValue(s) as Camera;
+- Line 182: private static WorkingOnComputerState.Mode GetMode(WorkingOnComputerState s)
+- Line 188: private static List<ISelectable> GetHBPCCandidates(HBPCStateBase s)
+- Line 195: private static void OnEnterState(State s)
+- Line 234: private static void AnnounceHBPCState(HBPCStateBase hbpc)
+- Line 267: private static void AnnounceMode(WorkingOnComputerState.Mode mode, Case theCase)
+- Line 300: private static void RefreshWCSTargets(WorkingOnComputerState wcs)
+- Line 362: private static void RefreshHBPCTargets(HBPCStateBase hbpc)
+- Line 375: private static void RefreshCableTargets(ConnectCableState ccs)
+- Line 403: private static void RefreshPipeTargets(ConnectPipeState cps)
+- Line 416: private static void Navigate(int dir)
+- Line 427: private static void AnnounceTarget(int idx)
+- Line 435: private static string GetTargetLabel(UnityEngine.Object t)
+- Line 485: private static bool HandleWCSInput(WorkingOnComputerState wcs, bool shift)
+- Line 503: private static void InteractWCS(UnityEngine.Object target, WorkingOnComputerState wcs)
+- Line 553: private static bool HandleHBPCInput(HBPCStateBase hbpc, bool shift)
+- Line 630: private static bool HandleHBPCInventoryInput()
+- Line 722: private static bool HandlePartInspectionInput()
+- Line 755: private static void RefreshVisualInventoryTargets(HBPCInventory hbpcInv)
+- Line 783: private static void AnnounceVisualInventoryOpen(HBPCInventory hbpcInv)
+- Line 806: private static void AnnounceVisualInvItem(Slot slot, int idx)
+- Line 824: private static void AnnouncePartInspection()
+- Line 838: private static bool HandleInstallInput(InstallingPartState ips)
+- Line 879: private static bool HandleCableInput(ConnectCableState ccs, bool shift)
+- Line 924: private static bool HandlePipeInput(ConnectPipeState cps, bool shift)
+- Line 963: /// <summary>Returns true when Space should simulate the game's action button (left mouse hold).</summary>
+- Line 964: public static bool IsActionInjecting()
+- Line 974: /// <summary>Called as Prefix on HBPCStateBase.Tick — positions cursor on focused target before raycast.</summary>
+- Line 975: public static void OnBeforeHBPCTick(HBPCStateBase hbpc)
+- Line 989: /// <summary>Harmony patch: makes PCBSInput.m_action.Get() return 1f (held) when Space is injecting.</summary>
+- Line 991: static class InputButton_Get_Inject_Patch
+- Line 993: static bool Prefix(InputButton __instance, ref float __result)
+- Line 1004: /// <summary>Harmony patch: positions cursor on focused target before HBPC raycast.</summary>
+- Line 1006: static class HBPCStateBase_Tick_Cursor_Patch
+- Line 1008: static void Prefix(HBPCStateBase __instance)

@@ -1,0 +1,48 @@
+﻿# Code Index for WorkshopSelectionHandler.cs
+
+- Line 10: /// <summary>
+- Line 11: /// Announces the workshop selection carousel and enables keyboard navigation.
+- Line 12: ///
+- Line 13: /// Up/Down/Home/End: navigate workshops.
+- Line 14: /// Enter (first press): select workshop — shows preview, announces name + confirm hint.
+- Line 15: /// Enter (second press): confirm selection and load the workshop.
+- Line 16: /// Escape: cancel confirmation or close the menu.
+- Line 17: /// Locked workshops are announced as locked; confirming them opens the DLC store prompt.
+- Line 18: /// </summary>
+- Line 19: public static class WorkshopSelectionHandler
+- Line 37: private sealed class Context : IInputContext, IHelpContext
+- Line 42: public bool HandleInput()
+- Line 59: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_workshopsel")); }
+- Line 68: /// <summary>True while the workshop selection overlay is open. Used by Main for F1 context.</summary>
+- Line 71: /// <summary>
+- Line 72: /// Polls for open/close (edge detection). Called from Main.Update as PollState().
+- Line 73: /// No key reading — that happens in Context.HandleInput().
+- Line 74: /// </summary>
+- Line 75: public static void PollState()
+- Line 82: /// <summary>Resets on scene change.</summary>
+- Line 83: public static void Reset()
+- Line 99: private static bool IsOpen()
+- Line 109: private static void OnClose()
+- Line 122: private static void Navigate(int direction)
+- Line 135: private static void NavigateTo(int index)
+- Line 146: /// <summary>
+- Line 147: /// First Enter press: calls OnWorkshopButtonClicked via Reflection, which shows the preview
+- Line 148: /// panel. Avoids invoking Button.onClick directly (which would trigger OnPointerExit
+- Line 149: /// with a null delegate and throw NullReferenceException).
+- Line 150: /// </summary>
+- Line 151: private static void SelectFocused()
+- Line 182: /// <summary>Second Enter press: confirm and load the workshop (or open DLC store if locked).</summary>
+- Line 183: private static void ConfirmWorkshop()
+- Line 197: /// <summary>Escape while confirming: cancel back to the workshop list.</summary>
+- Line 198: private static void CancelConfirm()
+- Line 215: /// <summary>Escape while in selection mode: close the workshop menu.</summary>
+- Line 216: private static void GoBack()
+- Line 227: private static void AnnounceButton(WorkshopSelectionButton btn, int pos, int total)
+- Line 243: /// <summary>Converts a sceneName like "Workshop_MyGarage" to "My Garage".</summary>
+- Line 244: private static string FormatSceneName(string sceneName)
+- Line 258: /// <summary>
+- Line 259: /// Fires after WorkshopSelectionMenu.Init sets up all pages and buttons.
+- Line 260: /// Saves menu reference, caches reflection, collects buttons, auto-focuses first.
+- Line 261: /// </summary>
+- Line 263: static class WorkshopSelectionMenu_Init_Patch
+- Line 265: static void Postfix(WorkshopSelectionMenu __instance)

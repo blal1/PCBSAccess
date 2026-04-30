@@ -1,0 +1,30 @@
+﻿# Code Index for ScreenReader.cs
+
+- Line 6: /// <summary>
+- Line 7: /// Wrapper for Tolk screen reader bridge library.
+- Line 8: /// Requires Tolk.dll and nvdaControllerClient64.dll in the game folder.
+- Line 9: /// </summary>
+- Line 10: public static class ScreenReader
+- Line 15: private static extern void Tolk_Load();
+- Line 18: private static extern void Tolk_Unload();
+- Line 21: private static extern bool Tolk_IsLoaded();
+- Line 24: private static extern bool Tolk_HasSpeech();
+- Line 27: private static extern bool Tolk_Output(string text, bool interrupt);
+- Line 30: private static extern bool Tolk_Silence();
+- Line 33: private static extern IntPtr Tolk_DetectScreenReader();
+- Line 46: /// <summary>Initializes Tolk. Call once at mod startup from Main.Awake().</summary>
+- Line 47: public static void Initialize()
+- Line 83: /// <summary>
+- Line 84: /// Speaks text via the active screen reader.
+- Line 85: /// When Main.DebugMode is true, also logs the announcement.
+- Line 86: /// </summary>
+- Line 87: /// <param name="text">Text to speak.</param>
+- Line 88: /// <param name="interrupt">If true (default), cuts off current speech before speaking.</param>
+- Line 89: public static void Say(string text, bool interrupt = true)
+- Line 107: /// <summary>Queues text after current speech finishes (interrupt = false).</summary>
+- Line 108: public static void SayQueued(string text) => Say(text, false);
+- Line 110: /// <summary>Stops current speech immediately.</summary>
+- Line 111: public static void Stop()
+- Line 118: /// <summary>Shuts down Tolk. Call from Main.OnDestroy().</summary>
+- Line 119: public static void Shutdown()
+- Line 128: /// <summary>True if a screen reader was detected and Tolk initialized successfully.</summary>

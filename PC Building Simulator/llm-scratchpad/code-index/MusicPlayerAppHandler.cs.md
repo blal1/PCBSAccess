@@ -1,0 +1,48 @@
+﻿# Code Index for MusicPlayerAppHandler.cs
+
+- Line 8: /// <summary>
+- Line 9: /// Announces the Music Player app.
+- Line 10: /// PlayTrack Postfix → "Now playing: track N, name."
+- Line 11: /// Populate Postfix → announces track count and sets focus to first row.
+- Line 12: /// OnPlayPause Postfix → "Playing." / "Paused."
+- Line 13: /// OnNext/OnPrev Postfix → announces new track name.
+- Line 14: /// Shuffle/Loop/Mute Postfix → announces toggle state.
+- Line 15: /// SetVolume Postfix → announces volume level.
+- Line 16: /// SetTab Postfix → announces active tab name.
+- Line 17: /// Navigation: Up/Down/Home/End to browse list, Enter to play focused track.
+- Line 18: /// </summary>
+- Line 19: public static class MusicPlayerAppHandler
+- Line 36: public static void Reset()
+- Line 50: private sealed class Context : IInputContext, IHelpContext
+- Line 55: public bool HandleInput()
+- Line 71: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_musicplayer")); }
+- Line 80: /// <summary>
+- Line 81: /// Applies deferred row refresh. Called from Main.Update each frame.
+- Line 82: /// Must continue to run every frame for the deferred-refresh pattern to work.
+- Line 83: /// Key handling has moved to Context.HandleInput().
+- Line 84: /// </summary>
+- Line 85: public static void Update()
+- Line 97: private static void Navigate(int dir)
+- Line 110: private static void NavigateTo(int index)
+- Line 117: private static void AnnounceRow(MusicPlayerTrackRow row)
+- Line 127: private static void ApplyRefresh(MusicPlayerApp app)
+- Line 153: static class MusicPlayerApp_PlayTrack_Patch
+- Line 155: static void Postfix(int i, string name)
+- Line 175: static class MusicPlayerApp_Populate_Patch
+- Line 177: static void Postfix(MusicPlayerApp __instance)
+- Line 193: static class MusicPlayerApp_OnPlayPause_Patch
+- Line 195: static void Postfix(MusicPlayerApp __instance)
+- Line 213: static class MusicPlayerApp_OnNext_Patch
+- Line 215: static void Postfix(MusicPlayerApp __instance)
+- Line 223: static class MusicPlayerApp_OnPrev_Patch
+- Line 225: static void Postfix(MusicPlayerApp __instance)
+- Line 233: static class MusicPlayerApp_Shuffle_Patch
+- Line 235: static void Postfix(MusicPlayerApp __instance)
+- Line 243: static class MusicPlayerApp_Loop_Patch
+- Line 245: static void Postfix(MusicPlayerApp __instance)
+- Line 253: static class MusicPlayerApp_Mute_Patch
+- Line 255: static void Postfix(MusicPlayerApp __instance)
+- Line 263: static class MusicPlayerApp_SetVolume_Patch
+- Line 265: static void Postfix(MusicPlayerApp __instance)
+- Line 277: static class MusicPlayerApp_SetTab_Patch
+- Line 279: static void Postfix(int i)

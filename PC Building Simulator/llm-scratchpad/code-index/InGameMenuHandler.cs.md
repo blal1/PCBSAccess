@@ -1,0 +1,33 @@
+﻿# Code Index for InGameMenuHandler.cs
+
+- Line 8: /// <summary>
+- Line 9: /// Announces the in-game pause menu and navigates its buttons.
+- Line 10: ///
+- Line 11: /// Up/Down: navigate visible buttons (top to bottom).
+- Line 12: /// Home: jump to first button.
+- Line 13: /// End:  jump to last button.
+- Line 14: /// Enter: activate the focused button.
+- Line 15: /// Announces menu name and button list on open.
+- Line 16: ///
+- Line 17: /// Open/close detection via polling activeSelf (PollState).
+- Line 18: /// Key handling via IInputContext (Context.HandleInput).
+- Line 19: /// </summary>
+- Line 20: public static class InGameMenuHandler
+- Line 33: private sealed class Context : IInputContext, IHelpContext
+- Line 38: public bool HandleInput()
+- Line 47: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_ingamemenu")); }
+- Line 56: /// <summary>
+- Line 57: /// Polls for open/close. Called from Main.Update each frame (replaces former Update()).
+- Line 58: /// No key handling here — that is in Context.HandleInput().
+- Line 59: /// </summary>
+- Line 60: public static void PollState()
+- Line 68: /// <summary>Resets on scene change.</summary>
+- Line 69: public static void Reset()
+- Line 82: private static bool IsMenuOpen()
+- Line 91: private static void OnOpen()
+- Line 117: private static void OnClose()
+- Line 129: private static void Navigate(int direction)
+- Line 145: private static void NavigateTo(int index)
+- Line 152: private static void ActivateFocused()
+- Line 162: private static void AnnounceButton(Button btn, int pos, int total)
+- Line 174: private static List<Button> CollectButtons()

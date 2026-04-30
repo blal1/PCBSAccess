@@ -1,0 +1,42 @@
+﻿# Code Index for InputRouter.cs
+
+- Line 5: /// <summary>
+- Line 6: /// Manages a LIFO stack of IInputContext objects.
+- Line 7: ///
+- Line 8: /// Only the topmost live context receives navigation key events each frame.
+- Line 9: /// Global hotkeys (F-keys, Numpad) are handled before this in Main.ProcessHotkeys()
+- Line 10: /// and are never blocked by the router.
+- Line 11: ///
+- Line 12: /// Thread safety: all calls happen on the Unity main thread — no locking needed.
+- Line 13: /// </summary>
+- Line 14: public static class InputRouter
+- Line 20: /// <summary>
+- Line 21: /// Pushes a context onto the top of the stack.
+- Line 22: /// Idempotent: if the context is already on the stack it is not added again.
+- Line 23: /// </summary>
+- Line 24: public static void Push(IInputContext ctx)
+- Line 32: /// <summary>
+- Line 33: /// Removes a specific context from anywhere in the stack.
+- Line 34: /// Safe to call even when the context is not currently on the stack.
+- Line 35: /// </summary>
+- Line 36: public static void Pop(IInputContext ctx)
+- Line 44: /// <summary>
+- Line 45: /// Clears all contexts.  Must be called from Main.OnSceneLoaded on scene change
+- Line 46: /// so stale contexts from the previous scene do not survive.
+- Line 47: /// </summary>
+- Line 48: public static void Reset()
+- Line 55: /// <summary>
+- Line 56: /// Called every frame from Main.Update() after ProcessHotkeys() returns false.
+- Line 57: ///
+- Line 58: /// 1. Auto-pops any context whose IsActive has become false (e.g. menu closed
+- Line 59: ///    externally by a patch or polling logic before we got here).
+- Line 60: /// 2. Routes input to the topmost live context.
+- Line 61: /// </summary>
+- Line 62: public static void Update()
+- Line 82: /// <summary>
+- Line 83: /// Calls AnnounceHelp() on the topmost context that implements IHelpContext.
+- Line 84: /// Returns true if help was announced, false if no context supports it.
+- Line 85: /// </summary>
+- Line 86: public static bool AnnounceTopContextHelp()
+- Line 99: /// <summary>Name of the currently top context, or "none".</summary>
+- Line 103: /// <summary>Number of contexts currently on the stack (for debugging).</summary>

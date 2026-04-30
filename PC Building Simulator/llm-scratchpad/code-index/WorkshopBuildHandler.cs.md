@@ -1,0 +1,30 @@
+﻿# Code Index for WorkshopBuildHandler.cs
+
+- Line 7: /// <summary>
+- Line 8: /// Announces workshop part tooltips when hovering slots during assembly/disassembly.
+- Line 9: /// Skips re-announcement if the context (part) hasn't changed.
+- Line 10: ///
+- Line 11: /// F4 / Numpad0 (wired in Main): re-read the last tooltip.
+- Line 12: /// </summary>
+- Line 13: public static class WorkshopBuildHandler
+- Line 24: /// <summary>Re-reads the last tooltip. Called from Main on F4 / Numpad0.</summary>
+- Line 25: public static void AnnounceLastTooltip()
+- Line 33: /// <summary>Resets on scene change.</summary>
+- Line 34: public static void Reset()
+- Line 44: /// <summary>
+- Line 45: /// Fires when any tooltip is shown.
+- Line 46: /// Announces action + part name + function (if changed context).
+- Line 47: /// </summary>
+- Line 50: static class ToolTips_Set_Patch
+- Line 52: static void Postfix(string text, MonoBehaviour context, string subject, string moreInfo)
+- Line 74: /// <summary>Fires when the tooltip is cleared. Resets context tracking.</summary>
+- Line 76: static class ToolTips_Clear_Patch
+- Line 78: static void Postfix()
+- Line 91: /// <summary>
+- Line 92: /// Fires when the building mode changes (assembly, disassembly, cabling, piping).
+- Line 93: /// Announces the new mode name so the user always knows which mode is active.
+- Line 94: /// </summary>
+- Line 96: static class WorkingOnPC_SetMode_Patch
+- Line 98: static void Postfix(WorkingOnComputerState.Mode mode)
+- Line 115: private static string ModeToLocKey(WorkingOnComputerState.Mode mode)
+- Line 134: private static string BuildAnnouncement(string action, string subject, string moreInfo)

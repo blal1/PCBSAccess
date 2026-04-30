@@ -1,0 +1,32 @@
+﻿# Code Index for PCBayHandler.cs
+
+- Line 7: /// <summary>
+- Line 8: /// Announces PCBay tablet app — buy page offers, sell page auctions, item detail, purchase result.
+- Line 9: ///
+- Line 10: /// OnGainFocus patch: captures active app instance, announces page + first item.
+- Line 11: /// Up/Down: navigate buy or sell list.
+- Line 12: /// Enter: show item detail (buy page) or trigger action (sell page).
+- Line 13: /// ShowMessage patch: announces purchase feedback (success/fail/delivery info).
+- Line 14: /// OnShowItem patch: announces item detail when info page opens.
+- Line 15: /// </summary>
+- Line 16: public static class PCBayHandler
+- Line 32: private sealed class Context : IInputContext, IHelpContext
+- Line 37: public bool HandleInput()
+- Line 86: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_pcbay")); }
+- Line 95: /// <summary>Resets on scene change.</summary>
+- Line 96: public static void Reset()
+- Line 112: private static void AnnounceBuyItem(int index)
+- Line 133: private static void AnnounceSellItem(int index)
+- Line 154: private static void StripRichText(ref string s)
+- Line 164: /// <summary>
+- Line 165: /// Fires whenever PCBay gains OS focus or the user switches Buy/Sell tabs.
+- Line 166: /// Captures the active instance and announces the current page.
+- Line 167: /// </summary>
+- Line 169: static class PCBayApp_OnGainFocus_Patch
+- Line 171: static void Postfix(PCBayApp __instance)
+- Line 222: /// <summary>Fires when item detail page opens. Announces name, price, delivery, description.</summary>
+- Line 224: static class PCBayApp_OnShowItem_Patch
+- Line 226: static void Postfix(PCBayApp __instance)
+- Line 251: /// <summary>Fires when PCBay shows a result message (purchase success/fail/nothing for sale).</summary>
+- Line 253: static class PCBayApp_ShowMessage_Patch
+- Line 255: static void Postfix(string message)

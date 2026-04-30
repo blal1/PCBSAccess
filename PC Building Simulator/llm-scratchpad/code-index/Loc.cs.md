@@ -1,0 +1,21 @@
+﻿# Code Index for Loc.cs
+
+- Line 7: /// <summary>
+- Line 8: /// Localization for mod-added labels. Supports English (default) and French.
+- Line 9: /// Game text (tutorial body, emails, part names) comes directly from the game — Loc only covers labels the mod adds.
+- Line 10: /// Usage: Loc.Get("key") or Loc.Get("key", arg0, arg1)
+- Line 11: /// </summary>
+- Line 12: public static class Loc
+- Line 20: /// <summary>Initializes localization. Call once from Main.Awake().</summary>
+- Line 21: public static void Initialize()
+- Line 29: /// <summary>
+- Line 30: /// Refreshes the active language from the game's current setting.
+- Line 31: /// Call if the player changes language at runtime.
+- Line 32: /// </summary>
+- Line 33: public static void RefreshLanguage()
+- Line 47: /// <summary>Returns the localized string for key. Falls back to English, then the key itself.</summary>
+- Line 48: public static string Get(string key)
+- Line 57: /// <summary>Returns the localized string with format arguments substituted ({0}, {1}, ...).</summary>
+- Line 58: public static string Get(string key, params object[] args)
+- Line 65: private static void Add(string key, string english, string french)
+- Line 71: private static void PopulateStrings()

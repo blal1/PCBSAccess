@@ -1,0 +1,38 @@
+﻿# Code Index for CareerJobHandler.cs
+
+- Line 9: /// <summary>
+- Line 10: /// Announces job details when navigating the email inbox and announces
+- Line 11: /// cash/kudos changes as they happen during career play.
+- Line 12: ///
+- Line 13: /// Up/Down arrows: navigate inbox rows.
+- Line 14: /// Enter: trigger the positive action button (Accept / Collect).
+- Line 15: /// F3 (wired in Main): re-read the last announced job.
+- Line 16: /// </summary>
+- Line 17: public static class CareerJobHandler
+- Line 32: private sealed class Context : IInputContext, IHelpContext
+- Line 45: public bool HandleInput()
+- Line 54: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_careerjob")); }
+- Line 63: /// <summary>Resets on scene change. Called from Main.OnSceneLoaded.</summary>
+- Line 64: public static void Reset()
+- Line 71: /// <summary>Re-reads the last announced job. Called from Main on F3.</summary>
+- Line 72: public static void AnnounceCurrentJob()
+- Line 84: private static void NavigateRows(int direction)
+- Line 107: private static void NavigateToRow(int index)
+- Line 122: private static void NavigateToLastRow()
+- Line 137: private static void ClickPositive()
+- Line 148: private static void AnnounceRow(EmailRowBase row)
+- Line 184: private static string FormatCash(int amount)
+- Line 191: private static List<EmailRowBase> GetRows(EmailApp app)
+- Line 199: private static int GetSelectedIndex(EmailApp app)
+- Line 211: /// <summary>Fires when any email/job row is selected. Stores the active EmailApp and announces the job.</summary>
+- Line 213: static class EmailApp_OnClickRow_Patch
+- Line 215: static void Postfix(EmailApp __instance, EmailRowBase row)
+- Line 230: /// <summary>Announces cash received (job collection, auction sale, etc.).</summary>
+- Line 232: static class CareerStatus_AddCash_Patch
+- Line 234: static void Postfix(int amount, CareerStatus __instance)
+- Line 249: /// <summary>Announces cash spent (parts, rent, utilities, etc.) when the spend succeeds.</summary>
+- Line 251: static class CareerStatus_SpendCash_Patch
+- Line 253: static void Postfix(bool __result, int cash, CareerStatus __instance)
+- Line 268: /// <summary>Announces kudos earned (job completion).</summary>
+- Line 270: static class CareerStatus_AddKudos_Patch
+- Line 272: static void Postfix(int kudos, CareerStatus __instance)

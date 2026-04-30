@@ -1,0 +1,33 @@
+﻿# Code Index for DaySummaryHandler.cs
+
+- Line 8: /// <summary>
+- Line 9: /// Announces the day summary screen (shown each morning and after advancing the day).
+- Line 10: ///
+- Line 11: /// On open: announces current date + cash + kudos.
+- Line 12: /// Up/Down: navigate visible buttons.
+- Line 13: /// Home/End: jump to first/last button.
+- Line 14: /// Enter: activate the focused button.
+- Line 15: ///
+- Line 16: /// Open/close detection via polling activeSelf (PollState).
+- Line 17: /// Key handling via IInputContext (Context.HandleInput).
+- Line 18: /// </summary>
+- Line 19: public static class DaySummaryHandler
+- Line 32: private sealed class Context : IInputContext, IHelpContext
+- Line 37: public bool HandleInput()
+- Line 46: public void AnnounceHelp() { ScreenReader.Say(Loc.Get("help_daysummary")); }
+- Line 55: /// <summary>
+- Line 56: /// Polls for open/close. Called from Main.Update each frame (replaces former Update()).
+- Line 57: /// No key handling here — that is in Context.HandleInput().
+- Line 58: /// </summary>
+- Line 59: public static void PollState()
+- Line 67: /// <summary>Resets on scene change.</summary>
+- Line 68: public static void Reset()
+- Line 81: private static bool IsOpen()
+- Line 91: private static void OnOpen()
+- Line 118: private static void OnClose()
+- Line 126: private static string GetDateString()
+- Line 141: private static void Navigate(int direction)
+- Line 155: private static void NavigateTo(int index)
+- Line 162: private static void ActivateFocused()
+- Line 172: private static void AnnounceButton(Button btn, int pos, int total)
+- Line 184: private static List<Button> CollectButtons()
