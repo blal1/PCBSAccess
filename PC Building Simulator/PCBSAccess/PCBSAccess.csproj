@@ -4,7 +4,7 @@
     <TargetFramework>net472</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <AssemblyName>PCBSAccess</AssemblyName>
     <RootNamespace>PCBSAccess</RootNamespace>
   </PropertyGroup>

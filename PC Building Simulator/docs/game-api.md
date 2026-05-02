@@ -342,18 +342,262 @@ string lang = LocalizationManager.CurrentLanguage; // "English" or "French"
 
 ---
 
+## 11. Tablet / OS App Classes (Phase 3B–4 Implementation Targets)
+
+### ReviewApp (ReviewApp.cs)
+- Displays company name, overall star rating, list of recent reviews
+- **Key fields:** `m_companyName (Text)`, `m_nReviews (Text)`, `m_starRating (StarRating)`, `m_reviewContainer (Transform)`
+- **Review items:** `ReviewEntry` children — `m_date (Text)`, `m_from (Text)`, `m_body (Text)`, `m_rating (StarRating)`
+- **Best patch point:** `ReviewApp.Awake()` Postfix (all text fields set by end of Awake via `UpdateReviews()`)
+- **Accessible data:** `CareerStatus.Get().GetBusinessName()`, `CareerStatus.Get().GetStarRating()`, `CareerStatus.Get().GetReviews()`
+- **IReview interface:** `GetStars() (float)`, `GetDay() (int)`, `GetFrom() (string)`, `GetReview() (string)`
+- **Navigation:** Up/Down through ReviewEntry children in m_reviewContainer; first item auto-announced on open
+- **Announce:** company name, star rating, N reviews. Per entry: X of Y. From. Body. Date. Stars.
+
+### RankApp (RankApp.cs)
+- GPU/CPU performance ranking chart — shows rank, part name, score bar
+- **Key fields:** `m_scrollRect (ScrollRect)`, `m_search (InputField)`, `m_resultCount (Text)`, `m_rows (private List<RankAppRow>)`
+- **Row class RankAppRow:** `m_rank (Text)`, `m_name (Text)`, `m_score (Text)` — all public fields
+- **Heading class RankAppHeading:** `m_title (Text)` — used for "GPU" / "CPU" category labels
+- **Best patch point:** `RankApp.Start()` Postfix — list is populated via `RefreshList()` at Start
+- **Navigation:** rows are children of `m_scrollRect.content` — collect via `GetComponentsInChildren<RankAppRow>()`; headings via `GetComponentsInChildren<RankAppHeading>()`
+- **Announce:** "Rank chart. X entries." then per row: "Rank N. Name. Score S."
+- **Key binding note:** Numpad2 assigned for re-read
+
+### VirusScanApp (VirusScanApp.cs)
+- Simulated virus scan — states: STANDARD, IN_PROGRESS, DIRTY, CLEAN
+- **Key fields (all public):** `m_title (Text)`, `m_message (Text)`, `m_buttonText (Text)`, `m_button (Button)`, `m_progressBar (GameObject)`, `m_progress (Image)`
+- **Button action:** `OnStart()` — starts scan (fires `StartScan()` which starts `ScanProcess()` coroutine)
+- **Best patch points:**
+  - `VirusScanApp.SetVisuals(State visuals)` Postfix — private, fires on every state change; `__0` parameter = State enum (int: 0=STANDARD, 1=IN_PROGRESS, 2=DIRTY, 3=CLEAN)
+  - OR poll `m_title.text` on open to read current state
+- **Announce on open:** read `m_title.text + ". " + m_message.text`. On Start click: "Scanning..." On complete DIRTY: title + message. On CLEAN: "No viruses found."
+- **Enter binding:** invoke `m_button.onClick` when button is active
+
+### MarketApp (MarketApp.cs)
+- Price graph for part categories over time — visual only, not interactive
+- **Key fields:** `m_min (Text)`, `m_max (Text)`, `m_today (Text)`, `m_start (Text)`, `m_keyEntries (List<Toggle>)`
+- **Key entries:** each `Toggle` has a child `Text` with `e.m_uiName` (category name) and `toggle.isOn` (visible/hidden)
+- **Best patch point:** `MarketApp.Start()` Postfix — all data initialized; `UpdateGraph()` is private
+- **Accessible data:** `PartsDatabase.MarketCategories()` returns all entries; `CareerStatus.Get().GetMarketValue(key, day)` gives today's price
+- **Announce:** read today's date from `m_today.text`; for each visible (isOn) toggle: category name + current market value + trend (compare today vs yesterday)
+- **No navigation needed** — read-only data display; one-shot announcement on open
+
+### LightingApp (LightingApp.cs)
+- LED color/effect configurator — complex multi-component editor
+- **Key fields:** `m_lightList (ScrollRect)`, `m_r/g/b (InputField)`, `m_effect (Dropdown)`, `m_speed/m_offset (Slider)`
+- **Row class LightingRow:** `m_name (Text)`, `m_toggle (Toggle)`, `m_colour (Image)` — Init sets `m_name.text = id + " " + index`
+- **Best patch point:** `LightingApp.Start()` Postfix — light list built at Start
+- **Navigation:** Up/Down through LightingRow children of `m_lightList.content`
+- **Select action:** simulate toggle via `row.m_toggle.isOn = !row.m_toggle.isOn`; invokes `app.OnSelectionChanged()`
+- **Apply:** `OnApply()` — public method on LightingApp
+- **Announce:** "Lighting. N LEDs. Up Down to navigate." Per row: "X of Y. [name]. [RGB values]."
+- **Complexity note:** Color picker is purely visual (HSV picker image); only expose RGB text fields + effect dropdown + sliders
+
+### MusicPlayerApp (MusicPlayerApp.cs)
+- In-game music player for soundtrack / user files / internet radio
+- **Key fields:** `m_trackList (ScrollRect)`, `m_trackName (Text)`, `m_play/m_pause (Button)`, `m_shuffle/m_loop/m_mute (Toggle)`, `m_volume (Slider)`
+- **Row prefab:** `MusicPlayerTrackRow` — has track number + name
+- **Best patch points:**
+  - `MusicPlayerApp.PlayTrack(int i, string name)` — private, fires when track changes. `m_currentTrack` field has formatted "Track N: name"
+  - `MusicManager.m_onPlay` event (Action<int, string>) — fired by MusicManager directly
+- **Controls:** OnPlayPause(), OnPrev(), OnNext() — all public
+- **Announce:** on track change: "Now playing: [track name]." Play/pause/prev/next via hotkeys mapped
+
+### OS Desktop (OS.cs)
+- Virtual PC operating system — desktop icons + taskbar + window management
+- **Key fields:** `m_icons (private List<ProgramIcon>)`, `m_taskBar (TaskBar)`, `m_startMenu (private StartMenu)`
+- **ProgramIcon:** `m_text (Text)` = app name; `m_onClick (private Action)` = custom action or launch; `m_desc (private OSProgramDesc)` = program descriptor
+- **OSProgramDesc:** `m_id (string)`, `m_uiName (string, computed)` = localized name via `("OSProgramName/" + m_id).Localized()`
+- **Best patch point:** `OS.OnStartup(ComputerSave computer)` Postfix — desktop icons built here; announces "Desktop. N apps."
+- **Desktop navigation:** Up/Down through `m_icons` list; Enter = double-click via `GetComponentInParent<OS>().Launch(m_desc)` or invoke `m_onClick`
+- **Note:** `ProgramIcon.OnClick()` requires TWO clicks (double-click pattern: first click sets highlight, second within 0.5s launches). Skip this — call `Launch()` directly.
+- **Window management:** `OS.Launch(OSProgramDesc desc)` opens app. `m_taskBar.m_running` = open windows (via TaskBarItem list — private).
+- **TaskBar:** `m_time (Text)` — clock. `TaskBarItem`: `m_name (Text)`, `GetWindow() (WindowFrame)`
+- **Start menu:** opened via `OS.OnOpenStartMenu()`. Items are `StartMenuItem` children: `m_name (Text)`, `OnClick()` launches app.
+- **Events:** `OS.m_gainFocus` (Action) — fires when OS gains focus
+
+### BIOS (Bios.cs)
+- System BIOS — System/CPU/RAM/Settings tabs with adjustable settings
+- **Key fields:** `m_tabContainer (GameObject)`, `m_settingsContainer (GameObject)`, `m_help (Text)`, `m_date (Text)`, `m_time (Text)`, `m_prompt (GameObject)`, `m_promptText (Text)`, `m_promptYes/No (Button)`
+- **Setting class BiosSetting:** `m_name (Text)`, `m_fixedValue (Text)`, `m_value (Text)`, `m_plus/m_minus (Button)` (adjust), `m_click (Button)` (action items)
+- **Best patch point:** `Bios.OnEnable()` Postfix — BIOS opened; `OnTab(int tab)` private — tab switched
+- **Tabs:** 0=System, 1=CPU (if overclockable), 2=RAM (if RAM installed), 3=Settings
+- **Tab buttons:** children of `m_tabContainer` — collect via `GetComponentsInChildren<Button>()`
+- **Settings:** children of `m_settingsContainer` — collect via `GetComponentsInChildren<BiosSetting>()`
+- **BiosSetting fields:** `m_name.text` = localized setting name; `m_fixedValue.text` or `m_value.text` = current value; `m_plus/m_minus` visible = adjustable; `m_click` visible = clickable action
+- **Navigation:** Up/Down through BiosSetting rows; Left/Right on adjustable rows = m_plus/m_minus click; Enter on action rows = m_click click
+- **Input capture note:** BIOS uses `PCBSInput.m_increaseBios`/`m_decreaseBios` (Rewired held actions) — we cannot capture those. Only handle Up/Down/Enter/Left/Right from our mod keys.
+- **Confirm prompt:** `m_prompt.activeSelf` = prompt open; Enter = `m_promptYes.onClick`, Escape = `m_promptNo.onClick`
+- **Announce on open:** manufacturer + current tab name + N settings
+- **Assign:** Numpad3 for re-read current setting
+
+### WindowFrame (WindowFrame.cs)
+- Generic OS window container for all tablet apps
+- **Key fields:** `m_title (Text)`, `m_icon (Image)`, `IsMinimised/IsMaximised (bool props)`
+- **Methods:** `OnTaskBar()` (toggle minimize), `OnClose()` → calls `OS.CloseWindow(this)`
+- **Events:** `OnSizeChanged (Action)` — fires when window resized/minimized/maximized
+
+### StartMenu (StartMenu.cs)
+- OS start menu — list of installed programs + shutdown/restart
+- **Items:** `StartMenuItem` children — `m_name (Text)`, `OnClick()` = launch
+- **Actions:** `OnShutdown()`, `OnRestart()` — public methods
+- **Patch point:** no dedicated open method; `StartMenu` instantiated by `OS.OnOpenStartMenu()`. Patch `OS.OnOpenStartMenu()`.
+
+### PermissionDeniedApp (PermissionDeniedApp.cs)
+- Shown when app cannot run on current PC (specs too low)
+- Low priority — just announce "Application cannot run: specs too low."
+
+---
+
+## 12. Career Events (Static Delegates on CareerStatus)
+
+**All confirmed from CareerStatus.cs decompile:**
+- `CareerStatus.s_onLevelUp` — `Action<int>` — zero-indexed level (implemented)
+- `CareerStatus.s_onNewReview` — `Action` — new review received (implemented)
+- `CareerStatus.s_onDayEnd` — `Action` — day ended (day cycle complete)
+- `CareerStatus.s_onStockChange` — `Action` — stock/inventory changed (shop restock)
+- `CareerStatus.s_onInventoryUpdated` — `Action` — player inventory changed
+- `CareerStatus.s_onBusinessNameChanged` — `Action` — business name changed
+- `CareerStatus.s_updateCalenderEvent` — `Action` — calendar day updated
+- NOTE: No s_onCashChange event exists. Cash changes must be detected via Harmony patch on `CareerStatus.AddCash(int amount)`.
+
+**Useful CareerStatus getter methods:**
+- `CareerStatus.Get().GetCash()` — int
+- `CareerStatus.Get().GetKudos()` — int
+- `CareerStatus.Get().GetStarRating()` — float
+- `CareerStatus.Get().GetBusinessName()` — string
+- `CareerStatus.Get().GetReviews()` — `List<IReview>`
+- `CareerStatus.Get().GetMarketValue(string key, int day)` — float percentage value (100=normal)
+- `CareerStatus.Get().GetMarketTrend(MarketEntry cat, int day)` — `ComponentMarket.TrendStrength`
+- `CareerStatus.Get().GetTrends(int day)` — `IEnumerable<TrendStrength>` all categories
+- `CareerStatus.Get().GetToday()` — int (day number)
+- `CareerStatus.Get().GetCalendar()` — Calendar; `GetDateString(day, format)`
+
+**Market trend system:**
+- `ComponentMarket.Trend` enum: HighMarket, Rising, Recovering, LowMarket, Falling, Stable, Mixed
+- `TrendStrength.m_trend` — the trend value
+- `TrendStrength.m_cat.m_uiName` — category display name
+- `PartsDatabase.MarketCategories()` — `IEnumerable<MarketEntry>` — all categories
+- `MarketEntry`: `m_key (string)`, `m_uiName (string)`, `m_category (MarketCategory enum)`, `m_color (Color)`
+
+---
+
+## 13. Keyboard Shortcut Master Map
+
+### Currently Assigned (Mod)
+- F1: Career status / main menu help
+- F2: Re-read tutorial task
+- F3: Re-read current job
+- F4 / Numpad0: Re-read workshop tooltip
+- F5: Re-read inventory item
+- F6: Re-read save slot
+- F7: Cycle job objectives
+- F8: Re-read HWInfo summary
+- F9: Re-read OCCT sensors (if ran) / 3DMark score
+- F10: Re-read PC Stats
+- Numpad1: Re-read shop item
+- Numpad5: Re-read Add Program item
+- F12: Toggle debug mode
+
+### Available for Next Features
+- F11: OS desktop / BIOS summary re-read
+- Numpad2: Re-read Rank chart item
+- Numpad3: Re-read BIOS setting
+- Numpad4: Re-read Review App entry
+- Numpad6: Re-read Music Player track
+- Numpad7: Re-read Lighting item
+- Numpad8: Re-read Virus Scan status
+- Numpad9: Re-read Market App summary
+
+---
+
+## 14. Debug / Accessibility Hooks (DebugVars.cs)
+
+`DebugVars` is a static class with public fields that change game behaviour. These cannot be set from mod safely in release builds (game may not honour them), but they reveal what the game already supports internally:
+
+- `DebugVars.s_fastWork (bool)` — screwing/installation animations run near-instantly; equivalent to ScrewUpgrade
+- `DebugVars.s_installAllApps (bool)` — installs all OS apps automatically; skips AddProgramApp navigation entirely
+- `DebugVars.s_showHiddenObjectives (bool)` — reveals hidden diagnostic objectives in JobStatus panel
+- `DebugVars.s_showVisuals (bool)` — enables extra visual debug overlays
+
+**Accessibility implication:** `s_showHiddenObjectives` could be exposed as a user-toggled accessibility option. If set to `true` before BIOS/job load, diagnostic objectives appear immediately without guessing. Check whether the game respects this field at runtime.
+
+---
+
+## 15. Upgrade Mechanics (InstallingPartState)
+
+These upgrades are purchasable in-game and directly reduce motor precision requirements. Document them so handlers can detect when they are active:
+
+- `PartDesc.AutoStandOffs` — standoffs auto-installed
+- `PartDesc.ScrewUpgrade` — screws auto-fastened (no manual screwdriver steps)
+- `PartDesc.AutoBuild` — parts snap without rotation alignment
+- `PartDesc.InternalAutoConnect` — internal cables auto-connected
+- `PartDesc.AutoConnect` / `PartDesc.QuickCable` — external cable auto-snap
+
+**Check if upgrade active:**
+```csharp
+// CareerStatus tracks purchased upgrades
+bool hasAutoConnect = CareerStatus.Get().HasUpgrade(PartDesc.AutoConnect);
+```
+
+---
+
+## 16. Input System — CursorGravity and DirectUI
+
+### CursorGravity (CursorGravity.cs)
+- Magnetizes the software cursor toward clickable elements (IPointerClickHandler) when within radius
+- Active in `InputModule` — part of the manette/gamepad cursor system
+- `GravityPoint` component placed on buttons defines the exact snap target
+- Mod should NOT interfere with CursorGravity — it already helps motor accessibility
+
+### DirectUI (DirectUI.cs)
+- Forces gamepad focus to first selectable element on panel activation
+- `m_firstControl (GameObject)` — first element to select on open
+- `m_rememberControl (bool)` — if true, returns to last-focused element when re-entering panel
+- `DirectUISkipThis` — tag to exclude decorative elements from navigation loop
+- `DirectUIAutoScrollOverride` — overrides auto-scroll target for a specific nav element
+- Our handlers must be compatible: do NOT override `EventSystem.current.SetSelectedGameObject()` when DirectUI is already managing focus in a menu
+
+### CustomNavigation (CustomNavigation.cs)
+- Allows manual override of navigation order between UI elements
+- `m_selectionPreference (List<GameObject>)` — explicit up/down/left/right targets
+- Relevant when building handler nav loops: check if elements already have CustomNavigation before adding our own key handling
+
+---
+
+## 17. CalendarWidget API
+
+- **Class:** `CalendarWidget`, `Calendar`, `CalendarDay`, `CalendarEvent`
+- `CalendarWidget` — displays current month; prev/next month buttons
+- `CalendarDay.m_today (bool)` — marks the current in-game day
+- `CalendarDay` — each day cell; has list of `CalendarEvent` objects
+- `CalendarEvent.GetDescription()` — returns localized event label ("Delivery", "Rent due", etc.)
+- Event colours: `s_paymentCol`, `s_deliveryCol`, `s_eventCol` (static Color fields on CalendarEvent)
+- `CareerStatus.Get().GetCalendar()` — returns `Calendar` instance
+- `Calendar.GetDateString(int day, string format)` — formatted date string
+- `CareerStatus.s_updateCalenderEvent` (Action) — fires on calendar update; subscribe here to detect day changes
+
+---
+
 ## 11. Not Yet Analyzed (Tier 2 — fill before implementing each feature)
 
 - [ ] PCBSInput default key assignments (run game and check KeyBindingMenu)
-- [ ] Assembly/build interaction classes (ComponentPC, WorkStation, Case)
-- [ ] Inventory panel internals (InventoryPanelSwitcher)
-- [ ] Shop/parts browser UI classes
-- [ ] Job/email system (Job, JobDesc, EmailApp)
-- [ ] WorldInteraction action display system
-- [ ] OptionsMenu slider/toggle access
+- [x] Assembly/build interaction classes — documented (WorkshopBuildHandler, PCBayHandler, HWInfoHandler)
+- [x] Inventory panel internals — documented (InventoryHandler)
+- [x] Shop/parts browser UI — documented (ShopHandler)
+- [x] Job/email system — documented (CareerJobHandler, EmailAppHandler)
+- [x] OptionsMenu slider/toggle access — documented (OptionsMenuHandler)
+- [x] MarketApp / market categories — documented in sections 11 and 12
+- [ ] CareerStatus.s_onCashChange — not confirmed to exist; use Harmony patch on AddCash() instead
+- [x] DebugVars accessibility hooks — documented in section 14
+- [x] CursorGravity / DirectUI — documented in section 16
+- [x] CalendarWidget API — documented in section 17
 
 ---
 
 ## Change History
 
 - **2026-04-20:** Full Tier 1 analysis completed from Assembly-CSharp-firstpass decompiled source
+- **2026-04-24:** Phase 3B analysis — added sections 11–13: ReviewApp, RankApp, VirusScanApp, MarketApp, LightingApp, MusicPlayerApp, OS Desktop, BIOS, WindowFrame, StartMenu; career events; keyboard shortcut master map
+- **2026-05-01:** Phase 3 complete analysis — added sections 14–17: DebugVars, upgrade mechanics, CursorGravity/DirectUI, CalendarWidget; coverage plan updated to reflect all 49 implemented features

@@ -1,0 +1,60 @@
+# Claude Code local settings
+.claude/
+
+# Build output
+bin/
+obj/
+*.bak
+
+# Decompiled game code (large, user-specific)
+decompiled/
+PCBS_Data/
+
+# Game executable and runtime files
+PCBS.exe
+UnityCrashHandler64.exe
+UnityPlayer.dll
+WinPixEventRuntime.dll
+winhttp.dll
+doorstop_config.ini
+.doorstop_version
+Data/
+Mono/
+
+# BepInEx runtime (DLLs compiled output — not source)
+BepInEx/
+
+# Accessibility SDK DLLs
+SAAPI64.dll
+Tolk.dll
+nvdaControllerClient64.dll
+
+# Game saves and user data
+Saves/
+
+# Razer Chroma temp files
+temp_*.chroma
+ChromaAppInfo.xml
+
+# Game changelog
+changelog.txt
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Internal notes (not part of template)
+docs/claude-md-improvements.md
+
+# Local files
+age-of-decadence-analyse.txt
+nul
+*.zip
+*.torrent
