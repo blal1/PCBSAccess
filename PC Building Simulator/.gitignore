@@ -50,8 +50,14 @@ Desktop.ini
 *.user
 *.suo
 
-# Internal notes (not part of template)
-docs/claude-md-improvements.md
+# Project-specific exclusions
+docs/
+docs-de/
+templates/
+prompts/
+project_status.md
+llm-entrypoint.md
+CLAUDE.de.md
 
 # Local files
 age-of-decadence-analyse.txt
