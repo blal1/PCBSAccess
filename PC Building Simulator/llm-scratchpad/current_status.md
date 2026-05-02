@@ -1,4 +1,0 @@
-# Current Status
-Branch: claude-mod-cleanup
-Run prompts: prompts/sanity-checks-setup.md, prompts/information-gathering-and-checking.md, prompts/code-directory-construction.md, prompts/input-handling.md, prompts/string-builder.md
-Status: Verified CLAUDE.md facts, updated docs. llm-docs created. code-index generated. Input handling abstraction already present. String builder abstraction not needed (minimal string building).
